@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
-
+    <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
+    
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -16,6 +15,7 @@
     <nav>
 
     <ul class="vertical menu align-righ">
+
       <% if user_signed_in?  %>
         <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
       <% else %>

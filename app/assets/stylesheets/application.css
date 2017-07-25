@@ -15,4 +15,11 @@
  *= require foundation_and_overrides
 
  */
- /*= require foundation
+
+
+/*body {
+  background-image: url("classroom.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%
+}*/

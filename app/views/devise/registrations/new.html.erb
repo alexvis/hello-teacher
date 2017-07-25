@@ -10,6 +10,10 @@
     <%= f.text_field :last_name, required: true, autofocus: true %></br>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+    <%= f.label "Teacher?" %> <br />
+    <%= f.check_box :teacher? %> <br />
+    <%= f.label "Parent?" %> <br />
+    <%= f.check_box :parent? %> <br />
   </div>
 
   <div class="field">
