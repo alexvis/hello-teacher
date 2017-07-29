@@ -11,6 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'devise'
 gem 'foundation-rails'
+gem 'carrierwave'
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
