@@ -14,7 +14,16 @@
     <%= f.check_box :teacher? %> <br />
     <%= f.label "Parent?" %> <br />
     <%= f.check_box :parent? %> <br />
-  </div>
+
+
+    <label>Upload Picture</label>
+    <%= f.file_field :profile_photo %>
+    <div class="actions">
+    </div>
+    <% if(resource.profile_photo?) %>
+    <img src="<%= resource.profile_photo %>" alt="">
+    <% end %>
+
 
   <div class="field">
     <%= f.label :password %>
@@ -33,5 +42,7 @@
     <%= f.submit "Sign Up" %>
   </div>
 <% end %>
+
+
 
 <%= render "devise/shared/links" %>
