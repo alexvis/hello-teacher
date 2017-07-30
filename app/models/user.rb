@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :profile_photo, ProfilePhotoUploader
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :teacher, inclusion: { in: [true, false]}
@@ -9,4 +11,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def admin?
+    role == "admin"
+  end
 end
