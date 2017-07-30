@@ -1,8 +1,18 @@
-<h1>Hello <%= current_user.first_name %></h1>
+<h1>Hello <%= current_user.full_name %></h1>
 
 
 
 
-<% if current_user.profile_photo? %>
-<img src="<%= current_user.profile_photo %>" alt="">
-<% end %>
+  <%= form_for current_user, html: { multipart: true } do |f| %>
+          <p>
+            <%= image_tag(current_user.profile_photo) if current_user.profile_photo? %>
+              <% if current_user.profile_photo? %>
+              <% else %>
+                <label>Upload Picture</label>
+                <%= f.file_field :profile_photo %>
+                <div class="actions">
+                  <%= f.submit "Upload Picture" %>
+                </div>
+              <% end %>
+          </p>
+        <% end %>
