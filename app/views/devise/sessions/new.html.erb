@@ -1,3 +1,6 @@
+
+<div class="translucent-form-overlay">
+
 <h2>Log in</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -8,8 +11,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign In" %>
+    <%= f.button :submit, "Sign In", class: 'new-user-form'  %>
   </div>
 <% end %>
-
+</div>
 <%= render "devise/shared/links" %>
