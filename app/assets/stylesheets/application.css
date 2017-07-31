@@ -29,3 +29,56 @@ img{
   width: 150px;
   height: 150px;
 }
+
+body {
+  background-color: #888EE0;
+  background-image: url(photo.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+.top-bar{
+  background-color: #03f4d3;
+}
+
+
+
+.new-user-form {
+  background-color: #1779BA;
+  height: 4em;
+  width: 16em;
+}
+
+.translucent-form-overlay {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(54, 54, 54, 0.8);
+  padding: 20px;
+  color: #fefefe;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.translucent-form-overlay .columns.row {
+  display: block;
+}
+
+.translucent-form-overlay h3, .translucent-form-overlay label {
+  color: #fefefe;
+}
+
+.translucent-form-overlay input, .translucent-form-overlay select {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+  color: #8a8a8a;
+}
