@@ -1,4 +1,7 @@
-<h2>Sign Up</h2>
+
+<div class="translucent-form-overlay">
+
+<h3>Sign Up</h3>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -12,7 +15,7 @@
     <%= f.email_field :email, autofocus: true %>
     <%= f.label "Teacher?" %><br/>
     <%= f.check_box :teacher? %><br/>
-  
+
     <label>Upload Picture</label>
     <%= f.file_field :profile_photo %>
     <div class="actions">
@@ -32,10 +35,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign Up" %>
+    <%= f.submit "Sign Up", class: 'new-user-form' %>
   </div>
 <% end %>
 
-
+</div>
 
 <%= render "devise/shared/links" %>
