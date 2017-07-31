@@ -12,4 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resource :users, only: :show do post :generate_new_password_email
+    end
+  end
 end
