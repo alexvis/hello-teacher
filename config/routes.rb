@@ -5,4 +5,11 @@ Rails.application.routes.draw do
   resources :welcome, only: [:index]
   resources :users
   resources :schools
+
+  namespace :api do
+    namespace :v1 do
+      resources :schools, only: [:index, :show]
+    end
+  end
+
 end

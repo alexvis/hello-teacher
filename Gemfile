@@ -12,6 +12,8 @@ gem 'jbuilder'
 gem 'devise'
 gem 'foundation-rails'
 gem 'carrierwave'
+gem 'active_model_serializers', '<= 0.9.9'
+
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -27,8 +29,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
   gem 'valid_attribute'
+  gem 'shoulda-matchers', require: false
 end
-
+group :test do
+  gem 'coveralls', require: false
+end
 group :production do
   gem 'rails_12factor'
 end
