@@ -26,6 +26,11 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: 'User was successfully destroyed!'
   end
 
+  def generate_new_password_email user = User.find(params[:user_id])
+    user.send_reset_password_instructions flash[:notice] = "Reset password instructions have been sent to #{user.email}."
+    redirect_to admin_user_path(user)
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :profile_photo)
