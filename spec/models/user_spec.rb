@@ -26,7 +26,7 @@ RSpec.describe User, type: :model do
     end
 
     it "is an admin if the role is admin" do
-      user = FactoryGirl.create(:user, role: "admin")
+      user = FactoryGirl.create(:user, role: "admid")
       expect(user.admin?).to eq(true)
     end
   end

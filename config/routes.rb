@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resource :users, only: :show do post :generate_new_password_email
+    resources :users, only: :show do post :generate_new_password_email
     end
   end
+
+  namespace :users do
+    resources :class
+  end
+
 end

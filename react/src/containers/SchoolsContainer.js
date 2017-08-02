@@ -157,8 +157,11 @@ handleSchoolZipCode(event){
   render(){
     return(
 
-      <div className="row">
+      <div className="translucent-form-overlay">
+
       <form onSubmit={this.handleFormSubmit}>
+
+      <div className="row columns">
         {this.state.nameError}
         <TextField
           content={this.state.name}
@@ -166,6 +169,9 @@ handleSchoolZipCode(event){
           name="name"
           handleChange={this.handleSchoolName}
         />
+        </div>
+
+        <div className="row columns">
         {this.state.addressError}
         <TextField
           content={this.state.address}
@@ -173,6 +179,9 @@ handleSchoolZipCode(event){
           name="address"
           handleChange={this.handleSchoolAddress}
         />
+        </div>
+
+        <div className="row columns">
         {this.state.cityError}
         <TextField
           content={this.state.city}
@@ -180,12 +189,21 @@ handleSchoolZipCode(event){
           name="city"
           handleChange={this.handleSchoolCity}
         />
+        </div>
+
+        <div className="row">
+
+        <div className="columns small-6">
         {this.state.stateError}
         <DropDownField
             label={'State'}
             rating={this.state.state}
             handleSelect={this.handleSchoolState}
           />
+        </div>
+
+        <div className="columns small-6">
+
         {this.state.zipError}
         <TextField
           content={this.state.zipCode}
@@ -193,6 +211,8 @@ handleSchoolZipCode(event){
           name="zipCode"
           handleChange={this.handleSchoolZipCode}
         />
+        </div>
+        </div>
 
         <div className="button-group">
           <button className="button" onClick={this.clearForm}>Clear</button>
