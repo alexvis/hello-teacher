@@ -24,7 +24,13 @@
   background-size: 100%
 }*/
 
-
+.school-title {
+  color: #1779BA;
+  background-color: white;
+  margin: auto;
+  width: 60%;
+  text-align: center;
+}
 img{
   width: 150px;
   height: 150px;
@@ -39,9 +45,7 @@ body {
   background-size: 100% 100%;
 
 }
-.top-bar{
-  background-color: #03f4d3;
-}
+
 
 
 
@@ -83,4 +87,141 @@ body {
 
 .translucent-form-overlay input::placeholder {
   color: #8a8a8a;
+}
+/**/
+
+
+/*! CSS for Responsive Hidden Nav */
+.responsive-hidden-nav-container {
+  min-width: 240px;
+  background: #1779ba;
+  padding: .5rem 1rem;
+  height: 6em;
+}
+
+.top-bar {
+  height: 4.5em;
+}
+
+.responsive-hidden-nav {
+  margin: 0;
+  padding: 0;
+  background-color: #fefefe;
+  position: relative;
+  min-width: 240px;
+  background: #fefefe;
+}
+
+.responsive-hidden-nav a {
+  display: block;
+  padding: 1.25rem 2rem;
+  background: #fefefe;
+  font-size: 1.1em;
+  color: #1779ba;
+  text-decoration: none;
+}
+
+.responsive-hidden-nav a:hover {
+  color: #0c3e5f;
+}
+
+.responsive-hidden-nav button {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  padding: 0 1rem;
+  border: 0;
+  outline: none;
+  background-color: #115b8d;
+  color: #fefefe;
+  cursor: pointer;
+}
+
+.responsive-hidden-nav button:hover {
+  background-color: #0c3e5f;
+}
+
+.responsive-hidden-nav button::after {
+  content: attr(count);
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  left: -1rem;
+  top: .75rem;
+  text-align: center;
+  background-color: #0c3e5f;
+  color: #fefefe;
+  font-size: .9em;
+  line-height: 1.6;
+  border-radius: 50%;
+  border: 0.25rem solid #fefefe;
+  font-weight: bold;
+}
+
+.responsive-hidden-nav button:hover::after {
+  -webkit-transform: scale(1.075);
+      -ms-transform: scale(1.075);
+          transform: scale(1.075);
+}
+
+.responsive-hidden-nav .hamburger {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.responsive-hidden-nav .hamburger::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fefefe;
+  box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
+  content: '';
+}
+
+.responsive-hidden-nav .hamburger:hover::after {
+  background: #fefefe;
+  box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
+}
+
+.responsive-hidden-nav .visible-links {
+  display: inline-table;
+  margin: 0;
+  padding: 0;
+}
+
+.responsive-hidden-nav .visible-links li {
+  display: table-cell;
+  border-left: 1px solid #1779ba;
+}
+
+.responsive-hidden-nav .visible-links li:first-child {
+  font-weight: bold;
+}
+
+.responsive-hidden-nav .visible-links li:first-child a {
+  color: #1779ba !important;
+}
+
+.responsive-hidden-nav .hidden-links {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.responsive-hidden-nav .hidden-links li {
+  display: block;
+  border-top: 0.0625rem solid #115b8d;
+}
+
+.responsive-hidden-nav .hidden {
+  visibility: hidden;
 }

@@ -12,50 +12,44 @@
 
   <body>
 
-    <div class="top-bar">
-      <div class="fixed-for-small sticky-for-medium-up">
+    <!-- <div class="fixed-for-small sticky-for-medium-up"> -->
+    <div class="responsive-hidden-nav-container">
+    <nav class="top-bar responsive-hidden-nav" >
 
 
-    <ul class="menu">
+       <ul class="menu simple vertical medium-horizontal">
 
-      <% if user_signed_in?  %>
-      <div class="left">
+          <% if user_signed_in?  %>
 
-        <li class="button"><%= link_to "Back", :back %></li>
-        <li class="button"><%= link_to 'My Account', user_path(current_user) %></li>
-        <li class="button"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
-        <!-- <li class="button"> <%= link_to 'Admin', users_path %> </li> -->
-
-      </div>
-      <div class="right">
-       <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-      </div>
-      <% if current_user.admin? || current_user.teacher? %>
-        <div class="right">
-          <li class="button"> <%= link_to 'Add School', schools_path %> </li>
-        </div>
-        <% if current_user.admin? %>
-        <div class="right">
-
-        <li class="button"> <%= link_to 'Admin', users_path %> </li>
-      </div>
+          <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+            <li class="right"><%= link_to "Back", :back %></li>
+            <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
 
 
-        <% end %>
-        <% end %>
+            <% if current_user.admin? || current_user.teacher? %>
+                <li class="right"> <%= link_to 'Add School', schools_path %> </li>
+              <% if current_user.admin? %>
+
+                <li class="right"> <%= link_to 'Admin', users_path %> </li>
+
+              <% end %>
+            <% end %>
+
+
+          <% else %>
+
+              <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
+              <li class="right"><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% end %>
       </ul>
-      <% else %>
-      <ul>
-      <div class="right">
-        <li><%= link_to "Sign In", new_user_session_path %></li>
-      </div>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-      <% end %>
-    </ul>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    </nav>
   </div>
-</div>
+
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+<!-- </div> -->
     <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
