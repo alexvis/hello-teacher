@@ -1,4 +1,8 @@
 class Api::V1::SchoolsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+
+
   def index
     render json: School.all
   end
@@ -8,4 +12,9 @@ class Api::V1::SchoolsController < ApplicationController
     render json: park
   end
 
+  def create
+    data = JSON.parse(request.body.read)
+     review = School.new(data)
+     review.save
+  end
 end
