@@ -130,7 +130,6 @@ handleSchoolZipCode(event){
     ){
       console.log("error")
     } else {
-      debugger
     let formPayload = {
       id: this.state.id,
       name: this.state.name,

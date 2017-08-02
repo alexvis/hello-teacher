@@ -24,16 +24,28 @@
         <li class="button"><%= link_to "Back", :back %></li>
         <li class="button"><%= link_to 'My Account', user_path(current_user) %></li>
         <li class="button"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+        <!-- <li class="button"> <%= link_to 'Admin', users_path %> </li> -->
+
       </div>
       <div class="right">
        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
       </div>
-      <% if current_user.admin? %>
+      <% if current_user.admin? || current_user.teacher? %>
         <div class="right">
-          <li class="button"> <%= link_to 'Admin', users_path %> </li>
+          <li class="button"> <%= link_to 'Add School', schools_path %> </li>
         </div>
+        <% if current_user.admin? %>
+        <div class="right">
+
+        <li class="button"> <%= link_to 'Admin', users_path %> </li>
+      </div>
+
+
         <% end %>
+        <% end %>
+      </ul>
       <% else %>
+      <ul>
       <div class="right">
         <li><%= link_to "Sign In", new_user_session_path %></li>
       </div>
