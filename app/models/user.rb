@@ -13,7 +13,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   def admin?
-    role == "admin"
+    role == "admid"
   end
 
   def full_name

@@ -10,10 +10,6 @@ class School < ApplicationRecord
     message: "alredy exists for this address"
   }
 
-  def admin?
-    role == "admin"
-  end
-
   def teacher?
     teacher == true
   end
