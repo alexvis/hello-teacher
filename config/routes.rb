@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users
   resources :schools
 
+
+
   namespace :api do
     namespace :v1 do
       resources :schools
@@ -17,8 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :users do
-    resources :class
+  resources :users do
+    resources :classrooms
   end
 
 end

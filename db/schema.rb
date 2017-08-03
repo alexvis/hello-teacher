@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20170802185839) do
     t.string "subject", null: false
     t.string "grade", null: false
     t.integer "class_number", null: false
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.bigint "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_id"], name: "index_classrooms_on_school_id"
-    t.index ["users_id"], name: "index_classrooms_on_users_id"
+    t.index ["user_id"], name: "index_classrooms_on_user_id"
   end
 
   create_table "schools", force: :cascade do |t|
