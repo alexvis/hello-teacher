@@ -13,4 +13,7 @@ class School < ApplicationRecord
   def teacher?
     teacher == true
   end
+
+  has_many :classrooms
+  has_many :users, through: :classrooms
 end
