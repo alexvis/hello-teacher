@@ -20,7 +20,9 @@
 
 
     <% @schools.each do |school| %>
-    <h3> <%= school.name %> </h3>
+    <h3>School Name: <%= school.name %> </h3>
+    <li> <%= link_to 'Add classrooms', user_school_classrooms_path(current_user, current_user.schools) %> </li>
+
     <% end %>
 
 
