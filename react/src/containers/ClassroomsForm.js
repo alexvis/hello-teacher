@@ -29,7 +29,11 @@ class ClassroomsForm extends Component{
   }
 
   addNewClassroom(formPayload) {
-    fetch('/api/v1/classrooms', {
+    debugger
+    let user_id = this.props.params.user_id
+    let school_id = this.props.params.school_id
+
+    fetch(`/api/v1/users/${user_id}/schools/${school_id}/classrooms`, {
       method: 'POST',
     body: JSON.stringify(formPayload)
   })
