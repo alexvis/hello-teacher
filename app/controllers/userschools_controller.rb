@@ -1,2 +1,0 @@
-class UserSchool < ApplicationController
-end
