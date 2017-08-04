@@ -20,6 +20,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  has_many :schools
   has_many :classrooms
-  has_many :schools, through: :classrooms
 end

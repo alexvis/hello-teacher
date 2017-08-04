@@ -16,7 +16,7 @@ class SchoolsContainer extends Component{
       address: '',
       city: '',
       state: '',
-      zipCode: ''
+      zipCode: '',
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
@@ -36,11 +36,13 @@ class SchoolsContainer extends Component{
     this.clearForm = this.clearForm.bind(this);
   }
 
+
   addNewSchool(formPayload) {
-    fetch('/api/v1/schools', {
+    let id = this.props.params.user_id
+    fetch(`/api/v1/users/${id}/schools`, {
       method: 'POST',
     body: JSON.stringify(formPayload)
-    })
+  })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -93,9 +95,7 @@ class SchoolsContainer extends Component{
     }
   }
 
-    // handleMealSelection(event) {
-    // this.validateMealSelection(event.target.value)
-    // }
+
 
 handleSchoolName(event){
   this.setState({name: event.target.value})
@@ -131,12 +131,12 @@ handleSchoolZipCode(event){
       console.log("error")
     } else {
     let formPayload = {
-      id: this.state.id,
       name: this.state.name,
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
       zip_code: this.state.zipCode,
+      user_id: this.props.params.user_id,
     };
     this.addNewSchool(formPayload);
     this.clearForm();
@@ -145,7 +145,6 @@ handleSchoolZipCode(event){
 
   clearForm() {
     this.setState({
-      id: '',
       name: '',
       address: '',
       state: '',
@@ -220,6 +219,7 @@ handleSchoolZipCode(event){
         </div>
       </form>
       </div>
+
     )
   }
 }

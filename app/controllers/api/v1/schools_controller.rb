@@ -8,13 +8,15 @@ class Api::V1::SchoolsController < ApplicationController
   end
 
   def show
-    park = School.find(params[:id])
-    render json: park
+    render json: School.find(params[:id])
+
   end
 
   def create
     data = JSON.parse(request.body.read)
      review = School.new(data)
      review.save
+     render json: review
   end
+
 end

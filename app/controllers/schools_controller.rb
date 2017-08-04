@@ -4,16 +4,21 @@ class SchoolsController < ApplicationController
 
 
   def index
-    @school = School.all
+    @schools = School.all
   end
 
  def show
+   @school = School.find(params[:id])
+   @user = @school.users
  end
 
  def create
  end
 
  def destroy
+   school = School.find(params[:id])
+   school.destroy
+   redirect_to users_path, notice: ' School was successfully destroyed!'
  end
 
  private

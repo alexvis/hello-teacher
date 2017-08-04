@@ -3,9 +3,14 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @schools = School.all
+
   end
 
   def show
+    @user = User.find(params[:id])
+    @classrooms = current_user.classrooms
+    @schools = current_user.schools
   end
 
   def edit
