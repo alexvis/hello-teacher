@@ -12,6 +12,12 @@
               <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
             </div>
           <% end %>
+          <% @schools.each do |school| %>
+            <div class="panel">
+                <h4>School Name: <%= school.name %></h4>
+                <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+          </div>
+          <% end %>
         </ul>
   </div>
 </div>

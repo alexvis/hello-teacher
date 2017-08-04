@@ -28,7 +28,9 @@
 
 
             <% if current_user.admin? || current_user.teacher? %>
-                <li class="right"> <%= link_to 'Add School', schools_path %> </li>
+                <li class="right"> <%= link_to 'Add School', user_schools_path(current_user) %> </li>
+                <li class="right"> <%= link_to 'Add classrooms', user_school_classrooms_path(current_user, current_user.schools.first.id) %> </li>
+
               <% if current_user.admin? %>
 
                 <li class="right"> <%= link_to 'Admin', users_path %> </li>

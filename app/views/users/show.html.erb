@@ -19,5 +19,19 @@
 
 
 
-<div id="app">
+    <% @schools.each do |school| %>
+    <h3> <%= school.name %> </h3>
+    <% end %>
+
+
+    <% @classrooms.each do |classroom| %>
+    <h3> <%= classroom.subject %> </h3>
+    <% end %>
+
+
+
+
+
+<div id="app" data-school_id= <%= @id %> data-user_id= <%= current_user && current_user.id %>>
+
 </div>

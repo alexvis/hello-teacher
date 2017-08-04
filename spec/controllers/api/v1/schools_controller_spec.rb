@@ -9,7 +9,7 @@ RSpec.describe Api::V1::SchoolsController, type: :controller do
     zip_code: "12200",
     ) }
 
-  describe "GET#index" do
+  xdescribe "GET#index" do
     it "should return details about a school" do
 
       get :index
