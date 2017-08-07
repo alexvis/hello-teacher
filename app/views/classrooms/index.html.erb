@@ -1,6 +1,38 @@
 <h1>hello from classroom index</h1>
 
 
-<div id="app">
+<% current_user.schools[0].classrooms.each do |c| %>
+  <li>
+    Class Subject: <%= c.subject %>
 
+  </li>
+<% end %>
+
+
+
+
+<% school_id = current_user.schools[0].id  %>
+<% user_id =  current_user.id %>
+
+
+<%= form_for @classroom, html: { class: 'panel'} do |f| %>
+
+  <div class="field">
+    <%= f.label :subject, 'Subject' %><br/>
+    <%= f.text_field :subject, required: true, autofocus: true %></br>
+
+    <%= f.label :grade, 'Grade' %><br/>
+    <%= f.text_field :grade, required: true, autofocus: true %></br>
+
+    <%= f.label :class_number, 'Class Number' %><br/>
+    <%= f.text_field :class_number, autofocus: true %>
+
+    <%= f.hidden_field :school_id, value: school_id %>
+
+    <%= f.hidden_field :user_id, value: user_id %>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: 'new-user-form' %>
+  </div>
 </div>
+<% end %>j

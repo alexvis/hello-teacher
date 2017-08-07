@@ -13,6 +13,13 @@ class SchoolsController < ApplicationController
  end
 
  def create
+   @school = School.new(school_params)
+   @user_id = current_user.id
+   if @school.save
+     redirect_to "/users/@user_id"
+   else
+     redirect_to '/users/@user_id'
+   end
  end
 
  def destroy
@@ -23,7 +30,7 @@ class SchoolsController < ApplicationController
 
  private
  def school_params
-   params.require(:school).permit(:name, :state, :address, :city, :zip_code)
+   params.require(:school).permit(:name, :state, :address, :city, :zip_code, :user_id)
  end
 
  def authorize_user
