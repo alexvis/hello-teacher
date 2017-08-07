@@ -1,8 +1,5 @@
 <h1>Hello <%= current_user.full_name %></h1>
 
-
-
-
   <%= form_for current_user, html: { multipart: true } do |f| %>
           <p>
             <%= image_tag(current_user.profile_photo) if current_user.profile_photo? %>
@@ -18,22 +15,95 @@
         <% end %>
 
 
+    <% @i = 0 %>
 
     <% @schools.each do |school| %>
-    <h3>School Name: <%= school.name %> </h3>
-    <li> <%= link_to 'Add classrooms', user_school_classrooms_path(current_user, current_user.schools) %> </li>
 
-    <% end %>
+        <h3>School Name: <%= school.name %> </h3>
+        <li> <%= link_to 'Add classrooms', user_school_classrooms_path(current_user, current_user.schools[@i].id) %> </li>
 
+        <% @i = @i + 1%>
+      <% end %>
 
-    <% @classrooms.each do |classroom| %>
-    <h3> <%= classroom.subject %> </h3>
-    <% end %>
+      <% user_id = @user.id %>
 
+      <%= form_for @school, html: { class: 'panel'} do |f| %>
 
+        <div class="field">
+          <%= f.label :name, 'Name' %><br/>
+          <%= f.text_field :name, required: true, autofocus: true %></br>
 
+          <%= f.label :address %><br/>
+          <%= f.text_field :address, required: true, autofocus: true %></br>
 
+          <%= f.label :city %><br/>
+          <%= f.text_field :city, autofocus: true %>
 
-<div id="app" data-school_id= <%= @id %> data-user_id= <%= current_user && current_user.id %>>
+          <%= f.label :state %><br/>
+          <%= f.select(:state, options_for_select([
+              ['-', '-'],
+              ['Alaska', 'AK'],
+              ['Alabama', 'AL'],
+              ['Arkansas', 'AR'],
+              ['American Samoa', 'AS'],
+              ['California', 'CA'],
+              ['Colorado', 'CO'],
+              ['Connecticut', 'CT'],
+              ['District of Columbia', 'DC'],
+              ['Delaware', 'DE'],
+              ['Florida', 'FL'],
+              ['Georgia', 'GA'],
+              ['Hawaii', 'HI'],
+              ['Iowa', 'IA'],
+              ['Idaho', 'ID'],
+              ['Illinois', 'IL'],
+              ['Kansas', 'KS'],
+              ['Kentucky', 'KY'],
+              ['Louisiana', 'LA'],
+              ['Massachusetts', 'MA'],
+              ['Maryland', 'MD'],
+              ['Maine', 'ME'],
+              ['Michigan', 'MI'],
+              ['Minnesota', 'MN'],
+              ['Missouri', 'MO'],
+              ['Mississippi', 'MS'],
+              ['Montana', 'MT'],
+              ['North Carolina', 'NC'],
+              ['North Dakota', 'ND'],
+              ['Nebraska', 'NE'],
+              ['New Hampshire', 'NH'],
+              ['New Jersey', 'NJ'],
+              ['New Mexico', 'NM'],
+              ['Nevada', 'NV'],
+              ['New York', 'NY'],
+              ['Ohio', 'OH'],
+              ['Oklahoma', 'OK'],
+              ['Oregon', 'OR'],
+              ['Pennsylvania', 'PA'],
+              ['Puerto Rico', 'PR'],
+              ['Rhode Island', 'RI'],
+              ['South Carolina', 'SC'],
+              ['South Dakota', 'SD'],
+              ['Tennessee', 'TN'],
+              ['Texas', 'TX'],
+              ['Utah', 'UT'],
+              ['Virginia', 'VA'],
+              ['Virgin Islands', 'VI'],
+              ['Vermont', 'VT'],
+              ['Washington', 'WA'],
+              ['Wisconsin', 'WI'],
+              ['West Virginia', 'WV'],
+              ['Wyoming', 'WY'],
 
-</div>
+          ])) %>
+
+          <%= f.label :zip_code %><br/>
+          <%= f.text_field :zip_code, autofocus: true %>
+
+          <%= f.hidden_field :user_id, value: user_id %>
+
+        <div class="actions">
+          <%= f.submit "Submit", class: 'new-user-form' %>
+        </div>
+      </div>
+      <% end %>

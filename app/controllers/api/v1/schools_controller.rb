@@ -13,7 +13,6 @@ class Api::V1::SchoolsController < ApplicationController
   end
 
   def create
-    binding.pry
     data = JSON.parse(request.body.read)
      review = School.new(data)
      review.save

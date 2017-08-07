@@ -3,7 +3,7 @@ class Api::V1::ClassroomsController < ApplicationController
 
 
   def index
-    render json: Classroom.all
+    render json: current_user.classrooms
   end
 
   def show

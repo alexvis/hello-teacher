@@ -18,6 +18,13 @@
                 <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
           </div>
           <% end %>
+          <% @classrooms.each do |classroom| %>
+            <div class="panel">
+                <h4>Classroom Name: <%= classroom.subject %></h4>
+                <%= link_to 'Delete Classroom', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+          </div>
+          <% end %>
+
         </ul>
   </div>
 </div>
