@@ -14,11 +14,13 @@ class SchoolsController < ApplicationController
 
  def create
    @school = School.new(school_params)
-   @user_id = current_user.id
+   user_id = current_user.id
+
    if @school.save
-     redirect_to "/users/@user_id"
+     redirect_to "/users/user_id"
    else
-     redirect_to '/users/@user_id'
+     print @school.errors.full_messages
+     redirect_to '/users/user_id'
    end
  end
 
