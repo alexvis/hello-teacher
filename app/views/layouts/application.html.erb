@@ -12,23 +12,27 @@
 
   <body>
 
-    <!-- <div class="fixed-for-small sticky-for-medium-up"> -->
-    <div class="responsive-hidden-nav-container">
-    <nav class="top-bar responsive-hidden-nav" >
 
 
-       <ul class="menu simple vertical medium-horizontal">
+
+
+<div class="row">
+  <div class="large-12 columns">
+
+
+     <nav class="top-bar" data-topbar>
+       <section class="top-bar-section">
+         <h4 class="left">Hello Teacher</h4>
+         <ul>
 
           <% if user_signed_in?  %>
 
-          <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
-            <li class="right"><%= link_to "Back", :back %></li>
-            <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
-
+                  <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                  <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+                  <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
 
             <% if current_user.admin? || current_user.teacher? %>
-                <li class="right"> <%= link_to 'Add School', user_schools_path(current_user) %> </li>
+                <!-- <li> <%= link_to 'Add School', user_schools_path(current_user) %> </li> -->
 
               <% if current_user.admin? %>
 
@@ -40,18 +44,36 @@
 
           <% else %>
 
-              <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
-              <li class="right"><%= link_to "Sign Up", new_user_registration_path %></li>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <% end %>
-      </ul>
-    </nav>
-  </div>
+
+         </ul>
+        </section>
+
+        </nav>
+      </div>
+
+
+
+
+
 
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-<!-- </div> -->
+  </div>
+  <div class="main">
+
+  <div class="row">
+    <div class="large-12 columns">
+
     <%= yield %>
+  </div>
+
+   </div>
+  </div>
     <%= javascript_include_tag "application" %>
+
   </body>
 </html>

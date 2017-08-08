@@ -5,55 +5,40 @@
       <%= form_for(current_user, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
 
-        <div class="row columns">
           <%= f.label :first_name %>
           <%= f.text_field :first_name %>
-        </div>
 
-        <div class="row columns">
           <%= f.label :last_name %>
           <%= f.text_field :last_name %>
-        </div>
 
-        <div class="row columns">
           <%= f.label :email %>
           <%= f.email_field :email %>
-            </div>
 
-        <div class="row columns">
         <% if(current_user.profile_photo?) %>
           <img src="<%= current_user.profile_photo %>" alt="">
             <%= f.label :profile_photo %>
             <%= f.file_field :profile_photo %>
         <% end %>
-        </div>
 
-       <div class="row columns">
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-      </div>
 
-        <div class="row columns">
           <%= f.label :current_password %> <i>Please enter your current password to confirm your changes.</i><br>
           <%= f.password_field :current_password, autocomplete: "off" %>
 
           <%= f.submit "Update" %>
-            </div>
 
-      <div class="row columns">
+
         <h6>Change Your Password</h6><br>
           <%= f.label :password %><br>
           <%= f.password_field :password, autocomplete: "off" %>
           <% if @minimum_password_length %>
                   <em><%= @minimum_password_length %> characters minimum</em>
           <% end %>
-        </div>
 
-        <div class="row columns">
           <%= f.label :password_confirmation %><br>
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
-        </div>
     <% end %>
 
     <h6>Cancel My Account</h6>

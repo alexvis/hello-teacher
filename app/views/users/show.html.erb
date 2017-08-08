@@ -1,4 +1,7 @@
-<h1>Hello <%= current_user.full_name %></h1>
+ <div class="panel">
+
+  <h1>Hello <%= current_user.full_name %></h1>
+
 
   <%= form_for current_user, html: { multipart: true } do |f| %>
           <p>
@@ -13,7 +16,12 @@
               <% end %>
           </p>
         <% end %>
+   </div>
 
+<div class="row">
+  <div class="large-4 columns">
+
+  <div class="panel">
 
     <% @i = 0 %>
 
@@ -24,12 +32,16 @@
 
         <% @i = @i + 1%>
       <% end %>
+      </div>
+    </div>
+    </div>
 
       <% user_id = @user.id %>
 
-      <%= form_for @school, html: { class: 'panel'} do |f| %>
+    <div class="translucent-form-overlay">
 
-        <div class="field">
+      <%= form_for @school, html: { class: ''} do |f| %>
+
           <%= f.label :name, 'Name' %><br/>
           <%= f.text_field :name, required: true, autofocus: true %></br>
 
@@ -102,8 +114,12 @@
 
           <%= f.hidden_field :user_id, value: user_id %>
 
-        <div class="actions">
-          <%= f.submit "Submit", class: 'new-user-form' %>
-        </div>
-      </div>
+
+          <%= f.submit "Submit", class: 'button submit-button' %>
       <% end %>
+  </div>
+
+
+      <div id="app">
+
+      </div>
