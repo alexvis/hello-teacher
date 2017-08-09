@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -15,65 +16,63 @@
 
 
 
+    <div class="row">
+      <div class="large-12 columns">
 
-<div class="row">
-  <div class="large-12 columns">
+
+         <nav class="top-bar" data-topbar>
+           <section class="top-bar-section">
+             <h4 class="left">Hello Teacher</h4>
+             <ul>
+
+              <% if user_signed_in?  %>
+
+                      <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                      <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+                      <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
+
+                <% if current_user.admin? || current_user.teacher? %>
+
+                  <% if current_user.admin? %>
+
+                    <li class="right"> <%= link_to 'Admin', users_path %> </li>
+
+                  <% end %>
+                <% end %>
 
 
-     <nav class="top-bar" data-topbar>
-       <section class="top-bar-section">
-         <h4 class="left">Hello Teacher</h4>
-         <ul>
+              <% else %>
 
-          <% if user_signed_in?  %>
-
-                  <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                  <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
-                  <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
-
-            <% if current_user.admin? || current_user.teacher? %>
-                <!-- <li> <%= link_to 'Add School', user_schools_path(current_user) %> </li> -->
-
-              <% if current_user.admin? %>
-
-                <li class="right"> <%= link_to 'Admin', users_path %> </li>
-
+                  <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
+                  <li class="right"><%= link_to "Sign Up", new_user_registration_path %></li>
               <% end %>
-            <% end %>
+
+             </ul>
+            </section>
+
+            </nav>
+          </div>
 
 
-          <% else %>
 
-              <li><%= link_to "Sign In", new_user_session_path %></li>
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
-          <% end %>
 
-         </ul>
-        </section>
 
-        </nav>
+
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      </div>
+      <div class="main">
+
+      <div class="row">
+        <div class="large-12 columns">
+
+        <%= yield %>
       </div>
 
-
-
-
-
-
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  </div>
-  <div class="main">
-
-  <div class="row">
-    <div class="large-12 columns">
-
-    <%= yield %>
-  </div>
-
-   </div>
-  </div>
-    <%= javascript_include_tag "application" %>
+       </div>
+      </div>
+        <%= javascript_include_tag "application" %>
 
   </body>
 </html>
