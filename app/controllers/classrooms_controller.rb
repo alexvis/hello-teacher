@@ -9,7 +9,9 @@ class ClassroomsController < ApplicationController
   end
 
   def show
-    @classroom = Classroom.find(params[:id])
+    @classroom = Classroom.new
+    @school_id = params["school_id"]
+    @school = School.where(id: @school_id)
   end
 
   def create
@@ -17,15 +19,21 @@ class ClassroomsController < ApplicationController
     @school = @classroom.school_id
     @user_id = current_user.id
     if @classroom.save
-      redirect_to "/users/@user_id/schools/@school/classrooms"
+      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show"
     else
-      render 'index'
+      render 'show.html.erb'
     end
   end
 
   def new
     @classroom = Classroom.new
+    @school = params["school_id"]
+    @user = params["user_id"]
+    @schools = School.all
+    @classrooms = params["classrooms"]
+
   end
+
 
   def destroy
     classroom = Classroom.find(params[:id])
