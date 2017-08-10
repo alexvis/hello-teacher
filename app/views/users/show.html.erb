@@ -52,16 +52,16 @@
 
       <%= form_for @school, html: { class: ''} do |f| %>
 
-          <%= f.label :name, 'Name' %><br/>
+          <%= f.label :name, 'School Name' %><br/>
           <%= f.text_field :name, required: true, autofocus: true %></br>
 
-          <%= f.label :address %><br/>
+          <%= f.label :address, 'School Address' %><br/>
           <%= f.text_field :address, required: true, autofocus: true %></br>
 
-          <%= f.label :city %><br/>
+          <%= f.label :city, 'School City' %><br/>
           <%= f.text_field :city, autofocus: true %>
 
-          <%= f.label :state %><br/>
+          <%= f.label :state, 'School State' %><br/>
           <%= f.select(:state, options_for_select([
               ['-', '-'],
               ['Alaska', 'AK'],

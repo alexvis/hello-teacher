@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
 
     <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
 
@@ -64,12 +65,11 @@
       </div>
       <div class="main">
 
-      <div class="row">
+       <div class="row">
         <div class="large-12 columns">
 
         <%= yield %>
-      </div>
-
+        </div>
        </div>
       </div>
         <%= javascript_include_tag "application" %>
