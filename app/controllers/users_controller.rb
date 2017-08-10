@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @id = 0
+
     @user = current_user
     @classrooms = current_user.classrooms
     @schools = current_user.schools

@@ -14,10 +14,10 @@
 <% school_id = current_user.schools[0].id  %>
 <% user_id =  current_user.id %>
 
+<div class="translucent-form-overlay">
 
-<%= form_for @classroom, html: { class: 'panel'} do |f| %>
+<%= form_for @classroom, html: { class: ''} do |f| %>
 
-  <div class="field">
     <%= f.label :subject, 'Subject' %><br/>
     <%= f.text_field :subject, required: true, autofocus: true %></br>
 
@@ -31,8 +31,7 @@
 
     <%= f.hidden_field :user_id, value: user_id %>
 
-  <div class="actions">
     <%= f.submit "Submit", class: 'new-user-form' %>
-  </div>
+<% end %>
+
 </div>
-<% end %>j

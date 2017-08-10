@@ -17,25 +17,25 @@
 
 
     <div class="row">
-      <div class="large-12 columns">
+      <div class="large-12 small-12 columns">
 
 
-         <nav class="top-bar" data-topbar>
+         <div class="top-bar" >
            <section class="top-bar-section">
              <h4 class="left">Hello Teacher</h4>
              <ul>
 
               <% if user_signed_in?  %>
 
-                      <li class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                      <li class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
-                      <li class="right"><%= link_to 'My Account', user_path(current_user) %></li>
+                      <p class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+                      <p class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
+                      <p class="right"><%= link_to 'My Account', user_path(current_user) %></p>
 
                 <% if current_user.admin? || current_user.teacher? %>
 
                   <% if current_user.admin? %>
 
-                    <li class="right"> <%= link_to 'Admin', users_path %> </li>
+                    <p class="right"> <%= link_to 'Admin', users_path %> </p>
 
                   <% end %>
                 <% end %>
@@ -50,7 +50,7 @@
              </ul>
             </section>
 
-            </nav>
+          </div>
           </div>
 
 

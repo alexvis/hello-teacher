@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   resources :welcome, only: [:index]
   resources :users
   resources :schools
-  resources :classrooms, only: [:index, :create, :destroy]
-
+  resources :classrooms
 
 
   resources :users do
