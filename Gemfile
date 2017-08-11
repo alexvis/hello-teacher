@@ -11,7 +11,7 @@ gem 'simple_form'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'devise'
-gem 'foundation-rails', '~> 6.0'
+gem 'foundation-rails'
 gem 'carrierwave'
 gem 'active_model_serializers', '<= 0.9.9'
 

@@ -26,6 +26,24 @@ class ClassroomsController < ApplicationController
     end
   end
 
+  def edit
+    @classroom = Classroom.find(params[:id])
+    @school_id = params["school_id"]
+
+  end
+
+  def update
+    @user_id = current_user.id
+    @classroom = Classroom.find(params[:id])
+    @school = @classroom.school_id
+
+    if @classroom.update(classroom_params)
+      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show"
+    else
+      render 'show.html.erb'
+    end
+  end
+
   def new
     @classroom = Classroom.new
     @school = params["school_id"]

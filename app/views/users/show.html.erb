@@ -21,7 +21,7 @@
     <% e = 10 %>
     <% i = 0 %>
 
-    <div class="small-12 large-6 columns">
+    <div class="small-12 medium-6 large-6 columns">
 
       <% @schools.each do |school| %>
 
@@ -50,6 +50,8 @@
                 <% if student.profile_photo? %>
                <%= image_tag(student.profile_photo) if current_user.profile_photo? %>
                <% end %>
+               <%= link_to 'Edit Student', edit_user_school_classroom_student_path(current_user, school, classroom, student ) %><br><br>
+
             <% end %>
            <% end %>
           </div>
@@ -65,7 +67,7 @@
 
 
 
-<div class="small-12 large-6 columns">
+<div class="small-12 large-6 medium-6 columns">
   <h3 id="l">School Form</h3>
 
     <div id="p" class="translucent-form-overlay">
