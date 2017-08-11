@@ -1,17 +1,12 @@
 
 
 .panel {
-  border: 0.5em ridge #522FAB;
+  border: 0.5em ridge yellow;
   color: black;
 
 }
 
-body {
-  background-image: url("background_for_hello_teacher.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100%
-}
+
 
 .row{
   background-color: rgba(54, 54, 54, 0.8);

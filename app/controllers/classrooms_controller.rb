@@ -12,6 +12,7 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.new
     @school_id = params["school_id"]
     @school = School.where(id: @school_id)
+
   end
 
   def create

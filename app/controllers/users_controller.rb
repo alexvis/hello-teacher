@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
     @user = current_user
     @classrooms = current_user.classrooms
     @schools = current_user.schools
@@ -31,7 +30,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to users_path, notice: 'User was successfully destroyed!'
+      redirect_to users_path, notice: 'User was successfully destroyed!'
   end
 
   # def generate_new_password_email user = User.find(params[:user_id])

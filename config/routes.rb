@@ -10,11 +10,13 @@ Rails.application.routes.draw do
   resources :users
   resources :schools
   resources :classrooms
-
+  resources :students
 
   resources :users do
     resources :schools do
-      resources :classrooms
+      resources :classrooms do
+        resources :students
+      end
     end
   end
 

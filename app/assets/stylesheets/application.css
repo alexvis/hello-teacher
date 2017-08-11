@@ -17,319 +17,166 @@
  */
 
 
-body {
-  background-image: url("background_for_hello_teacher.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100%
-}
-
-.row{
-  background-color: rgba(54, 54, 54, 0.8);
-
-}
-h4{
-  color: white;
-  font-family: fantasy;
-  margin: 1em 0em 0em 1em;
-  font-size: 1em;
-}
-
-/*.notice {
-  width: 50%;
-  margin: auto;
-  background-color: white;
-  color: red;
-  font-size: 2em;
-  text-align: center;
-}
-.school-title {
-  color: #1779BA;
-  background-color: white;
-  margin: auto;
-  width: 60%;
-  text-align: center;
-}*/
-
-
-img {
-  width: 12em;
-  height: 12em;
-}
-
-
-.new-user-form {
-  background-color: #1779BA;
-  height: 4em;
-  width: 16em;
-}
-
-.translucent-form-overlay {
-  max-width: 500px;
-  width: 100%;
-  background-color: rgba(54, 54, 54, 0.8);
-  padding: 20px;
-  color: #fefefe;
-  margin: auto;
-  margin-top: 2em;
-}
-
-.translucent-form-overlay .columns.row {
-  display: block;
-}
-
-.translucent-form-overlay h3, .translucent-form-overlay label {
-  color: #fefefe;
-}
-
-.translucent-form-overlay input, .translucent-form-overlay select {
-  color: #8a8a8a;
-}
-
-.translucent-form-overlay input::-webkit-input-placeholder {
-  color: #8a8a8a;
-}
-
-.translucent-form-overlay input:-ms-input-placeholder {
-  color: #8a8a8a;
-}
-
-.translucent-form-overlay input::placeholder {
-  color: #8a8a8a;
-}
-/**/
-
-
-/*! CSS for Responsive Hidden Nav */
-.responsive-hidden-nav-container {
-  min-width: 240px;
-  background: #1779ba;
-  padding: .5rem 1rem;
-  height: 6em;
-}
-
-.top-bar {
-  height: 4.5em;
-}
-
-.responsive-hidden-nav {
-  margin: 0;
-  padding: 0;
-  background-color: #fefefe;
-  position: relative;
-  min-width: 240px;
-  background: #fefefe;
-}
-
-.responsive-hidden-nav a {
-  display: block;
-  padding: 1.25rem 2rem;
-  background: #fefefe;
-  font-size: 1.1em;
-  color: #1779ba;
-  text-decoration: none;
-}
-
-.responsive-hidden-nav a:hover {
-  color: #0c3e5f;
-}
-
-.responsive-hidden-nav button {
-  position: absolute;
-  height: 100%;
-  right: 0;
-  padding: 0 1rem;
-  border: 0;
-  outline: none;
-  background-color: #115b8d;
-  color: #fefefe;
-  cursor: pointer;
-}
-
-.responsive-hidden-nav button:hover {
-  background-color: #0c3e5f;
-}
-
-.responsive-hidden-nav button::after {
-  content: attr(count);
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  left: -1rem;
-  top: .75rem;
-  text-align: center;
-  background-color: #0c3e5f;
-  color: #fefefe;
-  font-size: .9em;
-  line-height: 1.6;
-  border-radius: 50%;
-  border: 0.25rem solid #fefefe;
-  font-weight: bold;
-}
-
-.responsive-hidden-nav button:hover::after {
-  -webkit-transform: scale(1.075);
-      -ms-transform: scale(1.075);
-          transform: scale(1.075);
-}
-
-.responsive-hidden-nav .hamburger {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.responsive-hidden-nav .hamburger::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #fefefe;
-  box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
-  content: '';
-}
-
-.responsive-hidden-nav .hamburger:hover::after {
-  background: #fefefe;
-  box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
-}
-
-.responsive-hidden-nav .visible-links {
-  display: inline-table;
-  margin: 0;
-  padding: 0;
-}
-
-.responsive-hidden-nav .visible-links li {
-  display: table-cell;
-  border-left: 1px solid #1779ba;
-}
-
-.responsive-hidden-nav .visible-links li:first-child {
-  font-weight: bold;
-}
-
-.responsive-hidden-nav .visible-links li:first-child a {
-  color: #1779ba !important;
-}
-
-.responsive-hidden-nav .hidden-links {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.responsive-hidden-nav .hidden-links li {
-  display: block;
-  border-top: 0.0625rem solid #115b8d;
-}
-
-.responsive-hidden-nav .hidden {
-  visibility: hidden;
-}
-
-
-/*new back style*/
-
-
-
-
-
-.card-user-profile {
-  position: relative;
-  z-index: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-bottom: 1rem;
-  border: 0;
-  border-radius: 0;
-  background: #fefefe;
-  box-shadow: none;
-  overflow: hidden;
-  color: #0a0a0a;
-}
-
-.card-user-profile > :last-child {
-  margin-bottom: 0;
-}
-
-.card-user-profile:hover .card-user-profile-img {
-  opacity: 1;
-}
-
-.card-user-profile-content {
-  position: relative;
-}
-
-.card-user-profile-content::before {
-  position: absolute;
-  content: '';
-  top: -3.4375rem;
-  left: -1.875rem;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 3.4375rem 0 0 31.25rem;
-  z-index: 0;
-  border-color: transparent transparent transparent #fefefe;
-}
-
-.card-user-profile-actions {
-  -webkit-flex: 0 1 auto;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
-  padding: 1rem;
-  background: #e6e6e6;
-  background: #fefefe;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.card-user-profile-actions > :last-child {
-  margin-bottom: 0;
-}
-
-.card-user-profile-img {
-  max-width: 100%;
-  opacity: 0.85;
-  transition: all 0.25s ease;
-}
-
-
-/*top bar*/
-
-.top-bar-section .has-dropdown > a:after {
-    border: none;
-}
-
-.top-bar-section .has-dropdown > a {
-     padding-right: 15px !important;
+ body {
+   background-image: url("background_for_hello_teacher.jpeg");
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: 100%;
  }
 
-.top-bar-section .dropdown {
-    background: #333;
-}
+ .panel {
+   border: 0.5em ridge yellow;
+   color: black;
 
-.top-bar-section .has-dropdown.hover > .dropdown, .top-bar-section .has-dropdown.not-click:not(.moved):hover > .dropdown {
-    position: fixed !important;
-    width: 100% !important;
-    min-width: inherit;
-    max-width: 970px;
-    left: Calc(50% - 485px);
-}
+ }
 
-.top-bar-section .dropdown li {
-    width: auto;
-}
+
+
+ .row{
+   background-color: rgba(54, 54, 54, 0.8);
+
+ }
+ h4{
+   color: black;
+   font-family: fantasy;
+   margin: 1em 0em 0em 1em;
+   font-size: 1em;
+ }
+ .right{
+   float: right;
+   padding: 1em;
+ }
+ /*.notice {
+   width: 50%;
+   margin: auto;
+   background-color: white;
+   color: red;
+   font-size: 2em;
+   text-align: center;
+ }
+ .school-title {
+   color: #1779BA;
+   background-color: white;
+   margin: auto;
+   width: 60%;
+   text-align: center;
+ }*/
+
+
+ img {
+   width: 12em;
+   height: 12em;
+ }
+
+
+ .new-user-form {
+   background-color: #1779BA;
+   height: 4em;
+   width: 16em;
+ }
+
+ .translucent-form-overlay {
+   max-width: 500px;
+   width: 100%;
+   background-color: rgba(54, 54, 54, 0.8);
+   padding: 20px;
+   color: #fefefe;
+   margin: auto;
+   margin-top: 2em;
+ }
+
+ .translucent-form-overlay .columns.row {
+   display: block;
+ }
+
+ .translucent-form-overlay h3, .translucent-form-overlay label {
+   color: #fefefe;
+ }
+
+ .translucent-form-overlay input, .translucent-form-overlay select {
+   color: #8a8a8a;
+ }
+
+ .translucent-form-overlay input::-webkit-input-placeholder {
+   color: #8a8a8a;
+ }
+
+ .translucent-form-overlay input:-ms-input-placeholder {
+   color: #8a8a8a;
+ }
+
+ .translucent-form-overlay input::placeholder {
+   color: #8a8a8a;
+ }
+
+
+
+ /*new back style*/
+
+ .card-user-profile {
+   position: relative;
+   z-index: 0;
+   display: -webkit-flex;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-flex-direction: column;
+       -ms-flex-direction: column;
+           flex-direction: column;
+   margin-bottom: 1rem;
+   border: 0;
+   border-radius: 0;
+   background: #fefefe;
+   box-shadow: none;
+   overflow: hidden;
+   color: #0a0a0a;
+ }
+
+ .card-user-profile > :last-child {
+   margin-bottom: 0;
+ }
+
+ .card-user-profile:hover .card-user-profile-img {
+   opacity: 1;
+ }
+
+ .card-user-profile-content {
+   position: relative;
+ }
+
+ .card-user-profile-content::before {
+   position: absolute;
+   content: '';
+   top: -3.4375rem;
+   left: -1.875rem;
+   width: 0;
+   height: 0;
+   border-style: solid;
+   border-width: 3.4375rem 0 0 31.25rem;
+   z-index: 0;
+   border-color: transparent transparent transparent #fefefe;
+ }
+
+ .card-user-profile-actions {
+   -webkit-flex: 0 1 auto;
+       -ms-flex: 0 1 auto;
+           flex: 0 1 auto;
+   padding: 1rem;
+   background: #e6e6e6;
+   background: #fefefe;
+   display: -webkit-flex;
+   display: -ms-flexbox;
+   display: flex;
+ }
+
+ .card-user-profile-actions > :last-child {
+   margin-bottom: 0;
+ }
+
+ .card-user-profile-img {
+   max-width: 100%;
+   opacity: 0.85;
+   transition: all 0.25s ease;
+ }
+
+
+ /*top bar*/

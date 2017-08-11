@@ -18,37 +18,57 @@
    </div>
 
 
+    <% e = 10 %>
+    <% i = 0 %>
 
+    <div class="small-12 large-6 columns">
 
-      <div class="small-12 large-6 columns">
+      <% @schools.each do |school| %>
 
-    <% @schools.each do |school| %>
-    <div class="panel">
-        <h3>School Name: <%= school.name %> </h3>
-        <h5>School Address: <%= school.address %> </h5>
-        <h5>School City: <%= school.city %> </h5>
-        <h5>School State: <%= school.state %> </h5>
-        <h5>School Zip Code: <%= school.zip_code %> </h5>
+      <h3 id="<%= i %>" >School Name: <%= school.name %> </h3>
 
-         @id = school.id
+        <div id="<%= e %>" class="option" >
+          <div  class="panel">
 
-        <li> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </li>
+            <h5>School Address: <%= school.address %> </h5>
+            <h5>School City: <%= school.city %> </h5>
+            <h5>School State: <%= school.state %> </h5>
+            <h5>School Zip Code: <%= school.zip_code %> </h5>
 
-        <% school.classrooms.each do |classroom| %>
-        <h4>Classroom Name: <%= classroom.subject %></h4>
+            <li> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </li>
 
+            <% school.classrooms.each do |classroom| %>
+            <h4>Classroom Name: <%= classroom.subject %></h4>
+            <h4>Classroom Grade: <%= classroom.grade %></h4>
+            <h4>Classroom Class Number: <%= classroom.class_number %></h4>
+
+            <li> <%= link_to 'Add Student', user_school_classroom_student_path(current_user, school, classroom ) %> </li>
+
+            <% classroom.students.each do |student| %>
+                <h5>Student Name <%= student.full_name %> </h5>
+                <h5>Student Grade <%= student.grade %> </h5><br><br>
+                <% if student.profile_photo? %>
+               <%= image_tag(student.profile_photo) if current_user.profile_photo? %>
+               <% end %>
+            <% end %>
+           <% end %>
+          </div>
+        </div>
+          <% e = e + 1 %>
+          <% i = i + 1 %>
         <% end %>
-       </div>
-       <% end %>
       </div>
 
       <% user_id = @user.id %>
 
 <% if current_user.admin? || current_user.teacher? %>
 
-<div class="small-12 large-6 columns">
 
-    <div class="translucent-form-overlay">
+
+<div class="small-12 large-6 columns">
+  <h3 id="l">School Form</h3>
+
+    <div id="p" class="translucent-form-overlay">
 
       <%= form_for @school, html: { class: ''} do |f| %>
 
@@ -127,10 +147,7 @@
 
           <%= f.submit "Submit", class: 'button submit-button' %>
       <% end %>
+
+   <% end %>
   </div>
-
 </div>
-<% end %>
-      <div id="app">
-
-      </div>
