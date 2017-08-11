@@ -7,80 +7,53 @@
     <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-
-    <script>
-
-    $(document).ready(function(){
-      $(".option").hide();
-
-      $([10,11,12,13,14,15,16,17,18,19]).each(function(i, e){
-        $(`#${i}`).click(function(){
-          $(`#${e}`).slideToggle("slow");
-        });
-      });
-    });
-    </script>
 
   </head>
 
   <body>
+    <div class="top-bar" >
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">Hello Teacher</li>
+            <li>
+              <% if user_signed_in?  %>
+              <a href="#">menu</a>
+              <ul>
+
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+                <li><%= link_to 'My Account', user_path(current_user) %></li>
+              </ul>
+            </li>
+
+                  <% if current_user.admin? || current_user.teacher? %>
+                    <% if current_user.admin? %>
+                      <li> <%= link_to 'Admin', users_path %> </li>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                    <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
+                    <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                <% end %>
+          </ul>
+        </div>
+    </div>
+
 
     <div class="row">
-      <div class="small-12 columns">
-
-         <div class="top-bar topbar-responsive" >
-           <section class="top-bar-section">
-             <h4 class="left">Hello Teacher</h4>
-             <ul>
-
-              <% if user_signed_in?  %>
-
-                      <p class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
-                      <p class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
-                      <p class="right"><%= link_to 'My Account', user_path(current_user) %></p>
-
-                <% if current_user.admin? || current_user.teacher? %>
-
-                  <% if current_user.admin? %>
-
-                    <p class="right"> <%= link_to 'Admin', users_path %> </p>
-
-                  <% end %>
-                <% end %>
-
-
-              <% else %>
-
-                  <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
-                  <li class="right"><%= link_to "Sign Up", new_user_registration_path %></li>
-              <% end %>
-
-             </ul>
-            </section>
-
-          </div>
-          </div>
-
-
-
-
-
-
-
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      </div>
-      <div class="main">
+    </div>
 
-       <div class="row">
+    <div class="main">
+      <div class="row">
         <div class="large-12 columns">
-
         <%= yield %>
         </div>
-       </div>
       </div>
+    </div>
 
   </body>
 </html>
