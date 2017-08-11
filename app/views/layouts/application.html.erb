@@ -3,18 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
     <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+
+    <script>
+
+    $(document).ready(function(){
+      $(".option").hide();
+
+      $([10,11,12,13,14,15,16,17,18,19]).each(function(i, e){
+        $(`#${i}`).click(function(){
+          $(`#${e}`).slideToggle("slow");
+        });
+      });
+    });
+    </script>
+
   </head>
 
   <body>
-
-
-
 
     <div class="row">
       <div class="large-12 small-12 columns">
@@ -64,15 +75,13 @@
       </div>
       <div class="main">
 
-      <div class="row">
+       <div class="row">
         <div class="large-12 columns">
 
         <%= yield %>
-      </div>
-
+        </div>
        </div>
       </div>
-        <%= javascript_include_tag "application" %>
 
   </body>
 </html>

@@ -39,8 +39,10 @@
   <div class="large-6 medium-6 small-12 columns">
     <% s.classrooms.each do |c| %>
       <h4>Subject: <%= c.subject %></h4>
-      <h4>Grade: <%= c.subject %></h4>
-      <h4>Classroom Number: <%= c.subject %></h4><br><br>
+      <h4>Grade: <%= c.grade %></h4>
+      <h4>Classroom Number: <%= c.class_number %></h4><br><br>
+      <li> <%= link_to 'Add Student', user_school_classroom_student_path(current_user, s, c ) %> </li>
+
   <% end %>
 </div>
   <% end %>
