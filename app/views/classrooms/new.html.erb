@@ -2,34 +2,4 @@
 
 
 
-<% school_id = @school  %>
-<% user_id =  @user %>
-
-<div class="translucent-form-overlay">
-
-<%= form_for @classroom, html: { class: ''} do |f| %>
-
-    <%= f.label :subject, 'Subject' %><br/>
-    <%= f.text_field :subject, required: true, autofocus: true %></br>
-
-    <%= f.label :grade, 'Grade' %><br/>
-    <%= f.text_field :grade, required: true, autofocus: true %></br>
-
-    <%= f.label :class_number, 'Class Number' %><br/>
-    <%= f.text_field :class_number, autofocus: true %>
-
-    <%= f.hidden_field :school_id, value: school_id %>
-
-    <%= f.hidden_field :user_id, value: user_id %>
-
-    <%= f.submit "Submit", class: 'new-user-form' %>
-<% end %>
-
-<% binding.pry %>
-
-<% if @classrooms %>
-   <%= @classrooms.each do |c| %>
-    <li> <%= c.subject %></li>
-    <% end %>
-   <% end %>
-</div>
+<%= render 'form', classroom: @classroom %>

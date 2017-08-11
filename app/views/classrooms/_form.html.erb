@@ -1,0 +1,44 @@
+
+<% school_id = @school_id  %>
+<% user_id =  current_user.id %>
+
+
+
+<div class="translucent-form-overlay">
+  <h3>Add Classroom</h3>
+
+  <%= form_for @classroom, html: { class: ''} do |f| %>
+
+    <%= f.label :subject, 'Subject' %><br/>
+    <%= f.text_field :subject, required: true, autofocus: true %></br>
+
+    <%= f.label :grade, 'Student Grade' %><br/>
+    <%= f.select(:grade, options_for_select([
+        ['-', ''],
+        ['1st', '1st grade'],
+        ['2nd', '2nd grade'],
+        ['3rd', '3rd grade'],
+        ['4th', '4th grade'],
+        ['5th', '5th grade'],
+        ['6th', '6th grade'],
+        ['7th', '7th grade'],
+        ['8th', '8th grade'],
+        ['9th', '9th grade'],
+        ['10th', '10th grade'],
+        ['11th', '11th grade'],
+        ['12th', '12th grade']
+
+    ])) %>
+
+    <%= f.label :class_number, 'Class Number' %><br/>
+    <%= f.text_field :class_number, autofocus: true %>
+
+    <%= f.hidden_field :school_id, value: school_id %>
+
+    <%= f.hidden_field :user_id, value: user_id %>
+
+    <%= f.submit "Submit", class: 'new-user-form' %>
+<% end %>
+
+</div>
+</div>

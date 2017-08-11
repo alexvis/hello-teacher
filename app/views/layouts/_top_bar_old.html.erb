@@ -1,0 +1,23 @@
+<div class="small-12 columns">
+    <div class="top-bar topbar-responsive" >
+      <section class="top-bar-section">
+        <h4 class="left">Hello Teacher</h4>
+        <ul>
+          <% if user_signed_in?  %>
+            <p class="right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+            <p class="right"><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
+            <p class="right"><%= link_to 'My Account', user_path(current_user) %></p>
+
+            <% if current_user.admin? || current_user.teacher? %>
+              <% if current_user.admin? %>
+                <p class="right"> <%= link_to 'Admin', users_path %> </p>
+              <% end %>
+            <% end %>
+          <% else %>
+              <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
+              <li class="right"><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </section>
+  </div>
+</div>

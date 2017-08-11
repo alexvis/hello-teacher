@@ -42,11 +42,8 @@
    margin: 1em 0em 0em 1em;
    font-size: 1em;
  }
- .right{
-   float: right;
-   padding: 1em;
- }
- /*.notice {
+
+ .notice {
    width: 50%;
    margin: auto;
    background-color: white;
@@ -60,8 +57,7 @@
    margin: auto;
    width: 60%;
    text-align: center;
- }*/
-
+ }
 
  img {
    width: 12em;

@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
     @student.save
     if @student.save
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show",
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student}",
       notice: "Student successfully added"
 
     else
@@ -28,11 +28,33 @@ class StudentsController < ApplicationController
     end
   end
 
+  def edit
+    @student = Student.find(params[:id])
+    @school_id = params["school_id"]
+    @classroom_id = params["classroom_id"]
+
+  end
+
+  def update
+    @user_id = current_user.id
+
+    @student = Student.find(params[:id])
+    @school_id = @student.school_id
+    @classroom_id = @student.classroom_id
+    # @classroom = Classroom.where(id: @classroom_id)
+
+    if @student.update(student_params)
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show"
+    else
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show"
+    end
+  end
+
 
     private
 
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :grade, :profile_photo, :user_id, :school_id, :classroom_id)
+      params.require(:student).permit(:first_name, :last_name, :profile_photo, :grade, :user_id, :classroom_id, :school_id)
     end
 
     def authorize_user
