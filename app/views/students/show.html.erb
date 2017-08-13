@@ -1,10 +1,5 @@
-<h1>hello from students show</h1>
+<h1>Classroom Subject: <%= @classroom[0].subject %> </h1>
 
-
-<div class="large-6 medium-6 small-12 columns">
-  <%= render 'form', student: @student %>
-
-</div>
 
 
 
@@ -17,17 +12,26 @@
 <div class="large-6 small-12 columns">
   <%@classroom.each do |c| %>
     <% c.students.each do |s| %>
-       <h2>Classroom Subject: <%= c.subject %></h2>
+      <div class="callout">
+
        <h4>Student Name: <%= s.full_name %> </h4>
        <h4>Student Grade: <%= s.grade %> </h4>
+       <h4>Student last Update: <%= s.updated_at %> </h4>
+
         <% if s.profile_photo? %>
        <%= image_tag(s.profile_photo) if current_user.profile_photo? %><br>
        <% end %>
-       <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, c, s ) %><br><br>
-
+       <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, c, s ) %><br>
+       <%= link_to 'Delete Student', s, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
        <br><br>
 
+      </div>
     <% end %>
   <% end %>
+
+</div>
+
+<div class="large-6 medium-6 small-12 columns">
+  <%= render 'form', student: @student %>
 
 </div>

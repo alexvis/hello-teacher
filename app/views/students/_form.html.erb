@@ -3,8 +3,8 @@
 <% user_id =  current_user.id %>
 <% classroom_id =  @classroom_id %>
 
-  <div class="translucent-form-overlay">
-    <h3>Add Students</h3>
+<h3 id="">Please Fill Form</h3>
+  <div id="" class="translucent-form-overlay">
 
       <%= form_for @student, html: { class: ''} do |f| %>
 
@@ -16,7 +16,7 @@
 
           <%= f.label :grade, 'Student Grade' %><br/>
           <%= f.select(:grade, options_for_select([
-              ['-', ''],
+              ['-', '-'],
               ['A+', 'A+'],
               ['A', 'A'],
               ['A-', 'A-'],
@@ -48,4 +48,3 @@
       <% end %>
 
     </div>
-  </div>

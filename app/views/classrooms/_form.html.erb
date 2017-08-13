@@ -4,8 +4,6 @@
 
 
 
-<div class="translucent-form-overlay">
-  <h3>Add Classroom</h3>
 
   <%= form_for @classroom, html: { class: ''} do |f| %>
 
@@ -14,7 +12,7 @@
 
     <%= f.label :grade, 'Student Grade' %><br/>
     <%= f.select(:grade, options_for_select([
-        ['-', ''],
+        ['-', '-'],
         ['1st', '1st grade'],
         ['2nd', '2nd grade'],
         ['3rd', '3rd grade'],
@@ -39,6 +37,3 @@
 
     <%= f.submit "Submit", class: 'new-user-form' %>
 <% end %>
-
-</div>
-</div>
