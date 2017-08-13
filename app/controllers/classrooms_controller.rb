@@ -55,9 +55,13 @@ class ClassroomsController < ApplicationController
 
 
   def destroy
-    classroom = Classroom.find(params[:id])
-    classroom.destroy
-    redirect_to users_path, notice: 'User was successfully destroyed!'
+    @user_id = current_user.id
+
+    @classroom = Classroom.find(params[:id])
+    @school = @classroom.school_id
+
+    @classroom.destroy
+    redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show", notice: 'User was successfully destroyed!'
   end
 
   private

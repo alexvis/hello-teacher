@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
     @student.save
     if @student.save
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student}",
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student.id}",
       notice: "Student successfully added"
 
     else
@@ -50,6 +50,16 @@ class StudentsController < ApplicationController
     end
   end
 
+  def destroy
+    @user_id = current_user.id
+
+    @student = Student.find(params[:id])
+    @school_id = @student.school_id
+    @classroom_id = @student.classroom_id
+    student = Student.find(params[:id])
+    student.destroy
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student was successfully delete!'
+  end
 
     private
 

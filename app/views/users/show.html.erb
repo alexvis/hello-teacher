@@ -1,6 +1,9 @@
- <div class="panel">
+ <div class="callout">
+<div class="right">
 
-  <h1>Hello <%= current_user.full_name %></h1>
+  <h2>Hello <%= current_user.first_name %>. Here is your Info.</h2>
+  <h3>Your Full Name Is "<%= current_user.full_name %>" And You Email Address is "<%= current_user.email %>" </h3>
+</div>
 
   <%= form_for current_user, html: { multipart: true } do |f| %>
           <p>
@@ -28,21 +31,23 @@
       <h3 id="<%= i %>" >School Name: <%= school.name %> </h3>
 
         <div id="<%= e %>" class="option" >
-          <div  class="panel">
+          <div  class="callout classroom">
 
             <h5>School Address: <%= school.address %> </h5>
             <h5>School City: <%= school.city %> </h5>
             <h5>School State: <%= school.state %> </h5>
             <h5>School Zip Code: <%= school.zip_code %> </h5>
 
-            <li> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </li>
+            <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </p>
 
             <% school.classrooms.each do |classroom| %>
+            <div class="callout">
+
             <h4>Classroom Name: <%= classroom.subject %></h4>
             <h4>Classroom Grade: <%= classroom.grade %></h4>
             <h4>Classroom Class Number: <%= classroom.class_number %></h4>
 
-            <li> <%= link_to 'Add Student', user_school_classroom_student_path(current_user, school, classroom ) %> </li>
+            <p> <%= link_to 'Add Student', user_school_classroom_student_path(current_user, school, classroom ) %> </p>
 
             <% classroom.students.each do |student| %>
                 <h5>Student Name <%= student.full_name %> </h5>
@@ -53,6 +58,7 @@
                <%= link_to 'Edit Student', edit_user_school_classroom_student_path(current_user, school, classroom, student ) %><br><br>
 
             <% end %>
+          </div>
            <% end %>
           </div>
         </div>
@@ -68,7 +74,7 @@
 
 
 <div class="small-12 large-6 medium-6 columns">
-  <h3 id="l">School Form</h3>
+  <h3 id="l">Click here to add Schools</h3>
 
     <div id="p" class="translucent-form-overlay">
 

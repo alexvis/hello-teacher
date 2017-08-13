@@ -34,17 +34,17 @@
 
   <body>
     <div class="top-bar" >
-        <div class="top-bar-left">
+      <p class="menu-text ">Hello Teacher</p>
+        <div class="top-bar-right">
           <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Hello Teacher</li>
             <li>
               <% if user_signed_in?  %>
               <a href="#">menu</a>
               <ul>
 
-                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                <li><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
-                <li><%= link_to 'My Account', user_path(current_user) %></li>
+                <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+                <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
+                <p><%= link_to 'My Account', user_path(current_user) %></p>
               </ul>
             </li>
 

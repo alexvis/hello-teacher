@@ -1,9 +1,25 @@
 
+
+
+
+.classroom{
+  background-color: #F7F7EC;
+}
+
+.menu-text{
+  margin-top: auto;
+  margin-bottom: auto;
+
+
+}
+
+
 body {
   background-image: url("background_for_hello_teacher.jpeg");
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-attachment: fixed;
   background-size: 100%;
+  height: 100%;
 }
 
  .panel {
@@ -18,7 +34,6 @@ body {
  }
 
  h4{
-   color: black;
    font-family: fantasy;
    margin: 1em 0em 0em 1em;
    font-size: 1em;
@@ -29,7 +44,7 @@ body {
    margin: auto;
    background-color: white;
    color: red;
-   font-size: 2em;
+   font-size: 1em;
    text-align: center;
  }
  .school-title {
