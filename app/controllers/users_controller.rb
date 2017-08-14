@@ -8,10 +8,21 @@ class UsersController < ApplicationController
   end
 
   def show
+
     @user = current_user
     @classrooms = current_user.classrooms
     @schools = current_user.schools
     @school = School.new
+    @result_school = []
+    @school_array = []
+
+    if (params[:name] != '')
+      @school_array = School.search_name(params[:school])
+      @result_school = (@result_school + @school_array ).uniq
+    else
+      @school_array = []
+    end
+
   end
 
   def edit
