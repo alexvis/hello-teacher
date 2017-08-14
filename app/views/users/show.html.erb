@@ -1,9 +1,11 @@
- <div class="callout">
-<div class="right">
+<div class="callout">
+  <div class="">
 
-  <h2>Hello <%= current_user.first_name %>. Here is your Info.</h2>
-  <h3>Your Full Name Is "<%= current_user.full_name %>" And You Email Address is "<%= current_user.email %>" </h3>
-</div>
+    <h2>Hello <%= current_user.first_name %>. Here is your Info.</h2>
+    <h3>Your Full Name Is "<%= current_user.full_name %>" And You Email Address is "<%= current_user.email %>" </h3>
+  </div>
+  <% school = @schools %>
+
 
   <%= form_for current_user, html: { multipart: true } do |f| %>
           <p>
@@ -20,7 +22,23 @@
             <% end %>
   </div>
 
+    <div class="callout">
+      <%= form_tag(user_path(current_user), method: :get) do %>
+        <%= label :school, 'School Name' %>
+        <%= text_field_tag :school, nil %>
 
+        <%= submit_tag 'Search' %>
+      <% end %>
+
+       <% @result_school.each do |r| %>
+          <div class="callout">
+
+            <h1>School Name: <%= r.name %></h1>
+            <h1>School Address: <%= r.address %></h1><br><br>
+          </div>
+       <% end %>
+
+    </div>
     <% e = 10 %>
     <% i = 0 %>
 
@@ -70,8 +88,6 @@
       <% user_id = @user.id %>
 
 <% if current_user.admin? || current_user.teacher? %>
-
-
 
 <div class="small-12 large-6 medium-6 columns">
   <h3 id="l">Click here to add Schools</h3>
