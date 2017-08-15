@@ -16,14 +16,20 @@ class UsersController < ApplicationController
     @result_school = []
     @school_array = []
 
-    if (params[:name] != '')
-      @school_array = School.search_name(params[:school])
+    if (params[:name] != '' && params[:address] == '')
+      @school_array << School.search_name(params[:name])
       @result_school = (@result_school + @school_array ).uniq
-    else
-      @school_array = []
+    elsif (params[:name] == '' && params[:address] != '')
+        @school_array << School.search_address(params[:address])
+        @result_school = (@result_school + @school_array ).uniq
+    elsif (params[:name] != '' && params[:address] != '')
+      @school_array << School.search_name(params[:name])
+      @school_array << School.search_address(params[:address])
+      @result_school = (@result_school + @school_array ).uniq
+      else
+        @school_array = []
+      end
     end
-
-  end
 
   def edit
   end
@@ -43,11 +49,6 @@ class UsersController < ApplicationController
     user.destroy
       redirect_to users_path, notice: 'User was successfully destroyed!'
   end
-
-  # def generate_new_password_email user = User.find(params[:user_id])
-  #   user.send_reset_password_instructions flash[:notice] = "Reset password instructions have been sent to #{user.email}."
-  #   redirect_to admin_user_path(user)
-  # end
 
   private
   def user_params

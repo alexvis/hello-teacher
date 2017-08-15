@@ -10,22 +10,22 @@ class School < ApplicationRecord
     teacher == true
   end
 
-
-  def self.search_name(school)
-    if school
-      where('name LIKE ?', "%#{school}%")
+  def self.search_name(n)
+    if n
+      where('name LIKE ?', "%#{n}%")
     else
       @school = []
     end
   end
 
-  def self.search_address(school)
-    if school
-      where('address LIKE ?', "%#{school}%")
+  def self.search_address(a)
+    if a
+      where('address LIKE ?', "%#{a}%")
     else
       @school = []
     end
   end
+
 
 
   belongs_to :user

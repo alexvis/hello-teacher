@@ -24,18 +24,23 @@
 
     <div class="callout">
       <%= form_tag(user_path(current_user), method: :get) do %>
-        <%= label :school, 'School Name' %>
-        <%= text_field_tag :school, nil %>
+
+        <%= label :name, 'Search For School Name' %>
+        <%= text_field_tag :name, nil %>
+
+        <%= label :address, 'Search For School Address' %>
+        <%= text_field_tag :address, nil %>
 
         <%= submit_tag 'Search' %>
       <% end %>
 
        <% @result_school.each do |r| %>
+        <% r.each do |a| %>
           <div class="callout">
-
-            <h1>School Name: <%= r.name %></h1>
-            <h1>School Address: <%= r.address %></h1><br><br>
+            <h3>School Name: <%= a.name %></h3>
+            <h3>School Address: <%= a.address %>, <%= a.state %></h3><br><br>
           </div>
+        <% end %>
        <% end %>
 
     </div>
