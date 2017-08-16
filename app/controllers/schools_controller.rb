@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_action :authorize_user, only: [:index, :destroy]
+  before_action :authorize_user, only: [:destroy, :update, :create, :edit]
 
 
 
@@ -40,7 +40,7 @@ class SchoolsController < ApplicationController
 
  def show
    @school = School.find(params[:id])
-   @user = @school.users
+   @user = @school.user
  end
 
  def create

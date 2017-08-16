@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authorize_user
+  before_action :authorize_user, only: [:destroy, :create, :update, :edit]
 
   def index
   end
@@ -68,7 +68,7 @@ class StudentsController < ApplicationController
     end
 
     def authorize_user
-      if !user_signed_in?
+      if !user_signed_in? || !current_user.admin? && !current_user.teacher?
         raise ActionController::RoutingError.new("Not Found")
       end
     end
