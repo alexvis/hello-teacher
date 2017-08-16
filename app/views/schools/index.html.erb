@@ -14,17 +14,28 @@
         <%= label :zip_code, 'Search For School Zip Code' %>
         <%= text_field_tag :zip_code, nil %>
 
-       <%= submit_tag 'Search' %>
+       <%= submit_tag 'Search' %><br><br>
 
        <% end %>
      <% end %>
     <% end %>
 
      <% @result_school.each do |r| %>
+     <% if r.user.teacher? %>
         <div class="callout">
           <h3>School Name: <%= r.name %></h3>
-          <h3>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h3><br><br>
+          <h3>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h3><br>
+          <h3>Teacher Name: <%= r.user.full_name %> </h3>
+            <h4>Classes:</h4>
+               <% r.classrooms.each do |c| %>
+                 <h5>Subject: <%= c.subject %> </h5>
+                 <h5>Grade: <%= c.grade %> </h5>
+                 <h5>Class Number: <%= c.class_number %> </h5>
+
+               <% end %>
+               <%= link_to 'School Information',  user_school_path(current_user, r) %>
         </div>
+        <% end %>
       <% end %>
 
     </div>
