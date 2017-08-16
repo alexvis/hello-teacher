@@ -45,6 +45,7 @@
                 <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
                 <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
                 <p><%= link_to 'My Account', user_path(current_user) %></p>
+                <p><%= link_to 'Serch School', user_schools_path(current_user) %></p>
               </ul>
             </li>
 
@@ -66,6 +67,7 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
+
 
     <div class="main">
       <div class="row">

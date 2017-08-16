@@ -1,22 +1,18 @@
 <h1>Classroom Subject: <%= @classroom[0].subject %> </h1>
 
 
-
-
-
 <% school_id = @school_id  %>
 <% user_id =  current_user.id %>
 <% classroom_id =  @classroom_id %>
 
-
-<div class="large-6 small-12 columns">
+<div class="large-6 medium-6 small-12 columns">
   <%@classroom.each do |c| %>
     <% c.students.each do |s| %>
       <div class="callout">
 
        <h4>Student Name: <%= s.full_name %> </h4>
        <h4>Student Grade: <%= s.grade %> </h4>
-       <h4>Student last Update: <%= s.updated_at %> </h4>
+       <h4>Student last Update: <%= s.updated_at.strftime("%m %d %Y") %> </h4>
 
         <% if s.profile_photo? %>
        <%= image_tag(s.profile_photo) if current_user.profile_photo? %><br>
@@ -30,8 +26,8 @@
   <% end %>
 
 </div>
-
 <div class="large-6 medium-6 small-12 columns">
+  <h3>Fill for to add Student</h3>
   <%= render 'form', student: @student %>
 
 </div>

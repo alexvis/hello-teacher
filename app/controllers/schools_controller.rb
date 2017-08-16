@@ -5,6 +5,37 @@ class SchoolsController < ApplicationController
 
   def index
     @schools = School.all
+
+    @result_school = []
+    @school_array = []
+
+    if (params[:name] != '')
+      @school_array = School.search_name(params[:name])
+      @result_school = (@result_school + @school_array).uniq
+      flash[:notice] = "We Found #{@result_school.length + 1} matchin your search"
+
+      else
+        flash[:notice] = "Can't Find Any School Matching Your Search"
+    end
+
+    if (params[:address] != '')
+      @school_array = School.search_address(params[:address])
+      @result_school = (@result_school + @school_array)
+      flash[:notice] = "We Found #{@result_school.length} Schools matchin your search"
+
+      else
+        flash[:notice] = "Can't Find Any School Matching Your Search"
+    end
+
+    if (params[:zip_code] != '')
+      @school_array = School.search_zip_code(params[:zip_code])
+      @result_school = (@result_school + @school_array).uniq
+      flash[:notice] = "We Found #{@result_school.length} matchin your search"
+
+      else
+        flash[:notice] = "Can't Find Any School Matching Your Search"
+    end
+
   end
 
  def show
