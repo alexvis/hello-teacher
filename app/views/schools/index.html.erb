@@ -1,1 +1,30 @@
-<h2 class="school-title">Complete this form with your School information</h2>
+
+  <div class="callout">
+    <h3>Search For A School</h3>
+    <%= form_tag(user_schools_path(current_user), method: :get) do %>
+
+      <%= label :name, 'Search For School Name' %>
+      <%= text_field_tag :name, nil %>
+
+      <%= form_tag(user_schools_path(current_user), method: :get) do %>
+        <%= label :address, 'Search For School Address' %>
+        <%= text_field_tag :address, nil %>
+
+      <%= form_tag(user_schools_path(current_user), method: :get) do %>
+        <%= label :zip_code, 'Search For School Zip Code' %>
+        <%= text_field_tag :zip_code, nil %>
+
+       <%= submit_tag 'Search' %>
+
+       <% end %>
+     <% end %>
+    <% end %>
+
+     <% @result_school.each do |r| %>
+        <div class="callout">
+          <h3>School Name: <%= r.name %></h3>
+          <h3>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h3><br><br>
+        </div>
+      <% end %>
+
+    </div>

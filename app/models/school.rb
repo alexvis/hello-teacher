@@ -26,6 +26,13 @@ class School < ApplicationRecord
     end
   end
 
+  def self.search_zip_code(z)
+    if z
+      where('zip_code LIKE ?', "%#{z}%")
+    else
+      @school = []
+    end
+  end
 
 
   belongs_to :user

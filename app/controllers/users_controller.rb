@@ -13,23 +13,8 @@ class UsersController < ApplicationController
     @classrooms = current_user.classrooms
     @schools = current_user.schools
     @school = School.new
-    @result_school = []
-    @school_array = []
 
-    if (params[:name] != '' && params[:address] == '')
-      @school_array << School.search_name(params[:name])
-      @result_school = (@result_school + @school_array ).uniq
-    elsif (params[:name] == '' && params[:address] != '')
-        @school_array << School.search_address(params[:address])
-        @result_school = (@result_school + @school_array ).uniq
-    elsif (params[:name] != '' && params[:address] != '')
-      @school_array << School.search_name(params[:name])
-      @school_array << School.search_address(params[:address])
-      @result_school = (@result_school + @school_array ).uniq
-      else
-        @school_array = []
-      end
-    end
+  end
 
   def edit
   end
