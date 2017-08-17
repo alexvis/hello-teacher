@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
     @school_id = params["school_id"]
     @classroom_id = params["classroom_id"]
     @classroom = Classroom.where(id: @classroom_id)
+    @token = Token.new
   end
 
   def create

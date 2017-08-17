@@ -58,7 +58,7 @@ class SchoolsController < ApplicationController
  def destroy
    school = School.find(params[:id])
    school.destroy
-   redirect_to users_path, notice: ' School was successfully destroyed!'
+   redirect_to user_path(current_user), notice: ' School was successfully destroyed!'
  end
 
  private
