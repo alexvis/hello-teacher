@@ -6,15 +6,21 @@ class TokensController < ApplicationController
   def create
     @user_id = current_user.id
     @token = Token.new(token_params)
-    @token.save
     @school_id = @token.user.schools[0].id
     @classroom_id = @token.user.schools[0].classrooms[0].id
 
-    if current_user.teacher == true
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully added!'
+    if @token.token == ''
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token can\'t be empty!'
     else
-      redirect_to user_path(current_user)
+      @token.save
+
+      if current_user.teacher == true
+        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully added!'
+      else
+        redirect_to user_path(current_user)
+      end
     end
+
   end
 
   def destroy

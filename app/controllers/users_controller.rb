@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize_user, only: [:index, :destroy, :create, :update, :edit]
+  before_action :authorize_user, only: [:index, :destroy, :create]
 
   def index
     @users = User.all
