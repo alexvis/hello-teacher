@@ -19,7 +19,9 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
+  has_many :tokens
   has_many :schools
   has_many :classrooms
+
+  has_many :students, through: :tokens
 end

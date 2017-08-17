@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :schools
   resources :classrooms
   resources :students
+  resources :tokens
 
   resources :users do
     resources :schools do

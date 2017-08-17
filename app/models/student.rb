@@ -8,6 +8,8 @@ class Student < ApplicationRecord
   belongs_to :user
   belongs_to :classroom
   belongs_to :school
+  has_many :tokens
+  has_many :users, through: :tokens
 
 
   def full_name

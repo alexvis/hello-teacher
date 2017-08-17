@@ -1,6 +1,6 @@
 
 <div class="row">
-
+  <!-- user info box -->
   <div class="large-4 medium-5 columns">
 
     <div class="callout">
@@ -22,6 +22,8 @@
       <% end %>
   </div>
 </div>
+
+<!-- parent Information box -->
 <% if !current_user.teacher && current_user.role != "admid" %>
   <div class="large-8 medium-7 columns">
 
@@ -32,7 +34,7 @@
   </div>
 <% end %>
 
-
+  <!-- teacher school form and school info box -->
   <% if current_user.admin? || current_user.teacher? %>
 
     <% e = 10 %>
@@ -51,6 +53,7 @@
             <h5>City: <%= school.city %> </h5>
             <h5>State: <%= school.state %> </h5>
             <h5>Zip Code: <%= school.zip_code %> </h5>
+            <p><%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
             <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </p>
 
