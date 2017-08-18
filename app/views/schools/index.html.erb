@@ -1,4 +1,4 @@
-
+  <% user_id = current_user.id %>
   <div class="callout">
     <h3>Search For A School</h3>
     <%= form_tag(user_schools_path(current_user), method: :get) do %>
@@ -23,6 +23,7 @@
      <% @result_school.each do |r| %>
      <% if r.user.teacher? %>
         <div class="callout">
+
           <h3>School Name: <%= r.name %></h3>
           <h3>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h3><br>
           <h3>Teacher Name: <%= r.user.full_name %> </h3>
@@ -33,6 +34,18 @@
                  <h5>Class Number: <%= c.class_number %> </h5>
 
                <% end %>
+               <h5>To see your child Information add Token and ID:</h5>
+               <%= form_for @token, html: { class: ''} do |f| %>
+                 <%= f.label :token, 'Token' %>
+                 <%= f.text_field :token %>
+
+                 <%= f.hidden_field :user_id, value: user_id %>
+
+                 <%= f.label :student_id, 'Enter Student ID' %>
+                 <%= f.text_field :student_id %>
+
+                 <%= f.submit "Submit", class: 'new-user-form' %>
+                 <% end %>
                <%= link_to 'School Information',  user_school_path(current_user, r) %>
         </div>
         <% end %>

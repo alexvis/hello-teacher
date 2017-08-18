@@ -4,6 +4,7 @@ class SchoolsController < ApplicationController
 
 
   def index
+    @token = Token.new
     @schools = School.all
 
     @result_school = []

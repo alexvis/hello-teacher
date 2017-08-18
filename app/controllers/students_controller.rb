@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authorize_user, only: [:destroy, :create]
+  before_action :authorize_user, only: [:destroy]
 
   def index
   end

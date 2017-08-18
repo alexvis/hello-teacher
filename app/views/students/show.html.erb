@@ -13,13 +13,14 @@
         <h4>Student Name: <%= s.full_name %> </h4>
         <h4>Student Grade: <%= s.grade %> </h4>
         <h4>Student last Update: <%= s.updated_at.strftime("%m %d %Y") %> </h4>
-        <!-- student profile picture if id one  -->
+        <!-- Student profile picture if id one  -->
         <% if s.profile_photo? %>
-        <%= image_tag(s.profile_photo) if current_user.profile_photo? %><br>
+        <%= image_tag(s.profile_photo) %><br>
         <% end %>
 
         <% if s.tokens.length >=1 %>
-          <h5>Student Token: <%= s.tokens[0].token %></h5><br>
+          <h5>Student Token: <%= s.tokens[0].token %></h5>
+          <h5>Student Id: <%= s.id %></h5><br>
         <% else %>
           <%= form_for @token, html: { class: ''} do |f| %>
             <%= f.label :token, 'Token' %>
