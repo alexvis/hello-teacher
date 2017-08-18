@@ -2,37 +2,51 @@
 <div class="row">
   <!-- user info box -->
   <div class="large-4 medium-5 columns">
-
     <div class="callout">
       <h2>Hello <%= current_user.first_name %></h3>
-    <% school = @schools %>
+      <% school = @schools %>
 
-    <%= form_for current_user, html: { multipart: true } do |f| %>
-      <p>
-      <%= image_tag(current_user.profile_photo) if current_user.profile_photo? %>
+      <%= form_for current_user, html: { multipart: true } do |f| %>
+        <p>
+        <%= image_tag(current_user.profile_photo) if current_user.profile_photo? %>
         <% if current_user.profile_photo? %>
-          <% else %>
+        <% else %>
           <label>Upload Picture</label>
-            <%= f.file_field :profile_photo %>
-            <div class="actions">
-              <%= f.submit "Upload Picture" %>
-            </div>
+          <%= f.file_field :profile_photo %>
+          <div class="actions">
+            <%= f.submit "Upload Picture" %>
+          </div>
+          <% end %>
+        </p>
         <% end %>
-      </p>
-      <% end %>
-  </div>
-</div>
-
-<!-- parent Information box -->
-<% if !current_user.teacher && current_user.role != "admid" %>
-  <div class="large-8 medium-7 columns">
-
-    <div class="callout">
-      <h3>Search for School to find your child teacher</h3>
-        <%= link_to 'Search School', user_schools_path(current_user) %>
     </div>
   </div>
-<% end %>
+
+  <!-- parent Information box -->
+  <% if !current_user.teacher && current_user.role != "admid" %>
+    <div class="large-8 medium-7 columns">
+      <div class="callout">
+        <h3>Search for School to find your child teacher</h3>
+        <%= link_to 'Search School', user_schools_path(current_user) %>
+      </div>
+      <div class="callout">
+        <% if current_user.tokens %>
+          <% current_user.tokens.each do |t| %>
+            <% if t.student != nil %>
+              <% teacher = User.where(id: t.student.user_id) %>
+              <h3>Teacher Name: <%= teacher[0].full_name %></h3><br>
+              <ul>
+                <li>Studen Name: <%= t.student.full_name %></li><br>
+                <li><%= t.student.grade %></li><br>
+                <%= image_tag(t.student.profile_photo) %><br><br>
+              </ul>
+
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
   <!-- teacher school form and school info box -->
   <% if current_user.admin? || current_user.teacher? %>
@@ -44,7 +58,7 @@
 
       <% @schools.each do |school| %>
 
-      <h3 id="<%= i %>" >School Name: <%= school.name %> </h3>
+        <h3 id="<%= i %>" >School Name: <%= school.name %> </h3>
 
         <div id="<%= e %>" class="option" >
           <div  class="callout classroom">
@@ -55,46 +69,43 @@
             <h5>Zip Code: <%= school.zip_code %> </h5>
             <p><%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
-            <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %> </p>
+            <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %></p>
 
             <% school.classrooms.each do |classroom| %>
-            <div class="callout">
+              <div class="callout">
 
-            <h4>Classroom Name: <%= classroom.subject %></h4>
-            <h4>Classroom Grade: <%= classroom.grade %></h4>
-            <h4>Classroom Class Number: <%= classroom.class_number %></h4>
+                <h4>Classroom Name: <%= classroom.subject %></h4>
+                <h4>Classroom Grade: <%= classroom.grade %></h4>
+                <h4>Classroom Class Number: <%= classroom.class_number %></h4>
 
-            <p> <%= link_to 'Add Student', user_school_classroom_student_path(current_user, school, classroom ) %> </p>
-            <h3>Students List</h3>
-            <% classroom.students.each do |student| %>
-                <div class="callout">
+                <p> <%= link_to 'Edit Students', user_school_classroom_student_path(current_user, school, classroom ) %></p>
+                <h3>Students List</h3>
+                <% classroom.students.each do |student| %>
+                  <div class="callout">
 
-                  <h5>Student Name: <%= student.full_name %> </h5>
-                  <h5>Student Grade: <%= student.grade %> </h5>
-                  <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br><br>
-                  <% if student.profile_photo? %>
-                  <%= image_tag(student.profile_photo) if current_user.profile_photo? %><br>
-                  <% end %>
-                  <%= link_to 'Edit Student', edit_user_school_classroom_student_path(current_user, school, classroom, student ) %><br><br>
+                    <h5>Student Name: <%= student.full_name %> </h5>
+                    <h5>Student Grade: <%= student.grade %> </h5>
+                    <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br><br>
+                    <% if student.profile_photo? %>
+                    <%= image_tag(student.profile_photo) if current_user.profile_photo? %><br>
+                    <% end %>
+                    <%= link_to 'Edit Student', edit_user_school_classroom_student_path(current_user, school, classroom, student ) %><br><br>
 
-               </div>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
-          </div>
-           <% end %>
           </div>
         </div>
           <% e = e + 1 %>
           <% i = i + 1 %>
-        <% end %>
-      </div>
+      <% end %>
     </div>
+  </div>
 
-      <% user_id = @user.id %>
-
-
-<div class="small-12 large-6 medium-6 columns">
-  <h3 id="l">Click here to add Schools</h3>
-
+  <% user_id = @user.id %>
+  <div class="small-12 large-6 medium-6 columns">
+    <h3 id="l">Click here to add Schools</h3>
     <div id="p" class="translucent-form-overlay">
 
       <%= form_for @school, html: { class: ''} do |f| %>
@@ -110,71 +121,69 @@
 
         <%= f.label :state, 'School State' %><br/>
         <%= f.select(:state, options_for_select([
-            ['-', '-'],
-            ['Alaska', 'AK'],
-            ['Alabama', 'AL'],
-            ['Arkansas', 'AR'],
-            ['American Samoa', 'AS'],
-            ['California', 'CA'],
-            ['Colorado', 'CO'],
-            ['Connecticut', 'CT'],
-            ['District of Columbia', 'DC'],
-            ['Delaware', 'DE'],
-            ['Florida', 'FL'],
-            ['Georgia', 'GA'],
-            ['Hawaii', 'HI'],
-            ['Iowa', 'IA'],
-            ['Idaho', 'ID'],
-            ['Illinois', 'IL'],
-            ['Kansas', 'KS'],
-            ['Kentucky', 'KY'],
-            ['Louisiana', 'LA'],
-            ['Massachusetts', 'MA'],
-            ['Maryland', 'MD'],
-            ['Maine', 'ME'],
-            ['Michigan', 'MI'],
-            ['Minnesota', 'MN'],
-            ['Missouri', 'MO'],
-            ['Mississippi', 'MS'],
-            ['Montana', 'MT'],
-            ['North Carolina', 'NC'],
-            ['North Dakota', 'ND'],
-            ['Nebraska', 'NE'],
-            ['New Hampshire', 'NH'],
-            ['New Jersey', 'NJ'],
-            ['New Mexico', 'NM'],
-            ['Nevada', 'NV'],
-            ['New York', 'NY'],
-            ['Ohio', 'OH'],
-            ['Oklahoma', 'OK'],
-            ['Oregon', 'OR'],
-            ['Pennsylvania', 'PA'],
-            ['Puerto Rico', 'PR'],
-            ['Rhode Island', 'RI'],
-            ['South Carolina', 'SC'],
-            ['South Dakota', 'SD'],
-            ['Tennessee', 'TN'],
-            ['Texas', 'TX'],
-            ['Utah', 'UT'],
-            ['Virginia', 'VA'],
-            ['Virgin Islands', 'VI'],
-            ['Vermont', 'VT'],
-            ['Washington', 'WA'],
-            ['Wisconsin', 'WI'],
-            ['West Virginia', 'WV'],
-            ['Wyoming', 'WY'],
+          ['-', '-'],
+          ['Alaska', 'AK'],
+          ['Alabama', 'AL'],
+          ['Arkansas', 'AR'],
+          ['American Samoa', 'AS'],
+          ['California', 'CA'],
+          ['Colorado', 'CO'],
+          ['Connecticut', 'CT'],
+          ['District of Columbia', 'DC'],
+          ['Delaware', 'DE'],
+          ['Florida', 'FL'],
+          ['Georgia', 'GA'],
+          ['Hawaii', 'HI'],
+          ['Iowa', 'IA'],
+          ['Idaho', 'ID'],
+          ['Illinois', 'IL'],
+          ['Kansas', 'KS'],
+          ['Kentucky', 'KY'],
+          ['Louisiana', 'LA'],
+          ['Massachusetts', 'MA'],
+          ['Maryland', 'MD'],
+          ['Maine', 'ME'],
+          ['Michigan', 'MI'],
+          ['Minnesota', 'MN'],
+          ['Missouri', 'MO'],
+          ['Mississippi', 'MS'],
+          ['Montana', 'MT'],
+          ['North Carolina', 'NC'],
+          ['North Dakota', 'ND'],
+          ['Nebraska', 'NE'],
+          ['New Hampshire', 'NH'],
+          ['New Jersey', 'NJ'],
+          ['New Mexico', 'NM'],
+          ['Nevada', 'NV'],
+          ['New York', 'NY'],
+          ['Ohio', 'OH'],
+          ['Oklahoma', 'OK'],
+          ['Oregon', 'OR'],
+          ['Pennsylvania', 'PA'],
+          ['Puerto Rico', 'PR'],
+          ['Rhode Island', 'RI'],
+          ['South Carolina', 'SC'],
+          ['South Dakota', 'SD'],
+          ['Tennessee', 'TN'],
+          ['Texas', 'TX'],
+          ['Utah', 'UT'],
+          ['Virginia', 'VA'],
+          ['Virgin Islands', 'VI'],
+          ['Vermont', 'VT'],
+          ['Washington', 'WA'],
+          ['Wisconsin', 'WI'],
+          ['West Virginia', 'WV'],
+          ['Wyoming', 'WY'],
 
-            ])) %>
+          ])) %>
 
         <%= f.label :zip_code %><br/>
         <%= f.text_field :zip_code, autofocus: true %>
 
         <%= f.hidden_field :user_id, value: user_id %>
 
-
         <%= f.submit "Submit", class: 'button submit-button' %>
       <% end %>
-
-  </div>
+    </div>
   <% end %>
 </div>

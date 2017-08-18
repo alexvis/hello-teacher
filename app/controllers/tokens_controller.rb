@@ -5,30 +5,37 @@ class TokensController < ApplicationController
 
   def create
     @user_id = current_user.id
-    @token = Token.new(token_params)
-    @school_id = @token.user.schools[0].id
-    @classroom_id = @token.user.schools[0].classrooms[0].id
-
-    if @token.token == ''
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token can\'t be empty!'
-    else
+    if current_user.teacher == false
+      @token = Token.new(token_params)
       @token.save
+      redirect_to user_path(current_user)
+    if !@token.save
+      flash[:notice] = "not valid token or id "
+    end
 
-      if current_user.teacher == true
-        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully added!'
+    else
+      @token = Token.new(token_params)
+
+      @school_id = @token.user.schools[0].id
+      @classroom_id = @token.user.schools[0].classrooms[0].id
+
+      if @token.token == ''
+        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token can\'t be empty!'
       else
-        redirect_to user_path(current_user)
+        @token.save
+          redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully added!'
       end
     end
 
   end
 
+
   def destroy
     @user_id = current_user.id
 
     token = Token.find(params[:id])
-    @school_id = token.user.schools[0].id
-    @classroom_id = token.user.schools[0].classrooms[0].id
+    @school_id = token.student.school.id
+    @classroom_id = token.student.classroom.id
     token.destroy
     if current_user.teacher == true
       redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully delete!'
