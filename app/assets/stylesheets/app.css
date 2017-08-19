@@ -1,4 +1,9 @@
-
+.school-box{
+  background-color: #C2EAF5;
+}
+.student-box{
+  background-color: #8DD5E9;
+}
 
 .center{
   text-align: center;
@@ -15,7 +20,17 @@
 
 
 }
+.submit-button{
+  background-image: url(school-bus.png);
+  width: 9em;
+  height: 4em;
+  border-radius: 1em;
+  background-size: 103%;
+  background-position: center;
+  font-weight: 900;
+  color: white;
 
+}
 
 body {
   background-image: url("background_for_hello_teacher.jpeg");
@@ -30,10 +45,11 @@ body {
    color: black;
 
  }
-
+ .welcome-img{
+   height: 25em; width: 340em;
+ }
  .row{
    background-color: rgba(54, 54, 54, 0.8);
-
  }
 
 

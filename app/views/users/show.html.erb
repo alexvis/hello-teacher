@@ -1,4 +1,3 @@
-
 <div class="row">
   <!-- user info box -->
   <div class="large-4 medium-5 columns">
@@ -18,28 +17,56 @@
           </div>
           <% end %>
         </p>
-        <% end %>
+      <% end %>
     </div>
   </div>
-
   <!-- parent Information box -->
   <% if !current_user.teacher && current_user.role != "admid" %>
     <div class="large-8 medium-7 columns">
       <div class="callout">
         <h3>Search for School to find your child teacher</h3>
+        <% user_id = current_user.id %>
+        <%= form_for @token, html: { class: ''} do |f| %>
+          <% if @token.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@token.errors.count, "error") %> prohibited this token from being saved:</h2>
+              <ul>
+                <% @token.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= f.label :token, 'Token' %>
+          <%= f.text_field :token %>
+
+          <%= f.hidden_field :user_id, value: user_id %>
+
+          <%= f.label :student_id, 'Enter Student ID' %>
+          <%= f.text_field :student_id %>
+
+          <%= f.submit "Submit", class: 'button submit-button' %>
+        <% end %>
         <%= link_to 'Search School', user_schools_path(current_user) %>
       </div>
       <div class="callout">
         <% if current_user.tokens %>
           <% current_user.tokens.each do |t| %>
-            <% if t.student != nil %>
+            <!-- Student information array  -->
+            <% if t.student != nil%>
               <% teacher = User.where(id: t.student.user_id) %>
-              <h3>Teacher Name: <%= teacher[0].full_name %></h3><br>
-              <ul>
-                <li>Studen Name: <%= t.student.full_name %></li><br>
-                <li><%= t.student.grade %></li><br>
-                <%= image_tag(t.student.profile_photo) %><br><br>
-              </ul>
+              <div class="callout student-box">
+                <h3>Teacher Name: <%= teacher[0].full_name %></h3><br>
+                <ul>
+                  <li>Student Name: <%= t.student.full_name %></li><br>
+                  <li>Note: <%= t.student.grade %></li><br>
+                  <%= image_tag(t.student.profile_photo) %><br><br>
+                  <li>Token: <%= t.token %></li><br>
+                  <li>Id: <%= t.student.id %> </li>
+                  <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+
+                </ul>
+              </div>
 
             <% end %>
           <% end %>
@@ -68,6 +95,7 @@
             <h5>State: <%= school.state %> </h5>
             <h5>Zip Code: <%= school.zip_code %> </h5>
             <p><%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p><%= link_to 'Edit School', edit_user_school_path(current_user, school) %></p>
 
             <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %></p>
 
@@ -78,18 +106,21 @@
                 <h4>Classroom Grade: <%= classroom.grade %></h4>
                 <h4>Classroom Class Number: <%= classroom.class_number %></h4>
 
-                <p> <%= link_to 'Edit Students', user_school_classroom_student_path(current_user, school, classroom ) %></p>
+                <p> <%= link_to 'Edit or add Students', user_school_classroom_student_path(current_user, school, classroom ) %></p>
                 <h3>Students List</h3>
+                <!-- School box student information -->
                 <% classroom.students.each do |student| %>
+                  <% parent = User.where(id: student.tokens[1].user_id) %>
                   <div class="callout">
-
                     <h5>Student Name: <%= student.full_name %> </h5>
                     <h5>Student Grade: <%= student.grade %> </h5>
-                    <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br><br>
+                    <h5>Token: <%= student.tokens[0].token %></h5>
+                    <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br>
                     <% if student.profile_photo? %>
-                    <%= image_tag(student.profile_photo) if current_user.profile_photo? %><br>
+                    <%= image_tag(student.profile_photo) %><br>
                     <% end %>
-                    <%= link_to 'Edit Student', edit_user_school_classroom_student_path(current_user, school, classroom, student ) %><br><br>
+                    <h5>Parent Name: <%= parent[0].full_name %></h5>
+                    <%= image_tag(parent[0].profile_photo) %><br>
 
                   </div>
                 <% end %>
@@ -109,6 +140,16 @@
     <div id="p" class="translucent-form-overlay">
 
       <%= form_for @school, html: { class: ''} do |f| %>
+        <% if @school.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
+            <ul>
+              <% @school.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
         <%= f.label :name, 'School Name' %><br/>
         <%= f.text_field :name, required: true, autofocus: true %></br>

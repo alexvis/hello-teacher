@@ -36,6 +36,6 @@ class School < ApplicationRecord
 
 
   belongs_to :user
-  has_many :classrooms
-  has_many :students
+  has_many :classrooms, dependent: :destroy
+  has_many :students, dependent: :destroy
 end

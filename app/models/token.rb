@@ -1,5 +1,6 @@
 class Token < ApplicationRecord
-  validates :token, presence: true
+  validates :token,uniqueness: { scope: :user,
+    message: "This token is being used" }
 
   belongs_to :user
   belongs_to :student

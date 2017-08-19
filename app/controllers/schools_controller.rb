@@ -56,6 +56,21 @@ class SchoolsController < ApplicationController
    end
  end
 
+ def edit
+   @school = School.find(params[:id])
+ end
+
+ def update
+   @school = School.find(params[:id])
+   if @school.update(school_params)
+     redirect_to user_path(current_user)
+     flash[:notice] = "School was updated"
+   else
+     redirect_to user_path(current_user)
+     flash[:notice] = @school.errors.full_messages
+   end
+ end
+
  def destroy
    school = School.find(params[:id])
    school.destroy
