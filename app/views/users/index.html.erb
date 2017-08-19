@@ -1,30 +1,35 @@
+<div class="callout admid-box">
+  <h1 align="center">Admid Page</h1><br>
+  <h1>Users List</h1><br>
+  <ul>
+    <% @users.each do |user| %>
+    <div class="callout user-box">
+      <% if user.teacher == true %>
+        <h5>Teacher</h5>
+      <% end %>
+      <% if user.role == "admid" %>
+        <h5>Admin</h5>
+      <% end %>
+      <% if user.teacher == false%>
+      <h5>Parent</h5>
+      <% end %>
+      <h5>User Name: <%= user.full_name %> </h5>
+      <h5>User email: <%= user.email %> </h5>
 
-
-
-<div class="translucent-form-overlay">
-  <div class="panel">
-    <h1 align="center">Admin Page</h1><br>
-      <h1>Users List</h1><br>
-        <ul>
-          <% @users.each do |user| %>
-            <div class="panel">
-              <h4>User Name: <%= user.full_name %> </h4>
-              <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-            </div>
-          <% end %>
-          <% @schools.each do |school| %>
-            <div class="panel">
-                <h4>School Name: <%= school.name %></h4>
-                <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-          </div>
-          <% end %>
-          <% @classrooms.each do |classroom| %>
-            <div class="panel">
-                <h4>Classroom Name: <%= classroom.subject %></h4>
-                <%= link_to 'Delete Classroom', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-          </div>
-          <% end %>
-
-        </ul>
-  </div>
+      <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+    </div>
+    <% end %>
+    <% @schools.each do |school| %>
+      <div class="callout school-box">
+        <h5>School Name: <%= school.name %></h5>
+        <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+      </div>
+    <% end %>
+    <% @classrooms.each do |classroom| %>
+      <div class="callout classroom-box">
+        <h5>Classroom Name: <%= classroom.subject %></h5>
+        <%= link_to 'Delete Classroom', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+      </div>
+    <% end %>
+  </ul>
 </div>

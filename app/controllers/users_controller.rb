@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @token = Token.all
+    @token = Token.new
+    @tokens = Token.all
     @user = current_user
     @classrooms = current_user.classrooms
     @schools = current_user.schools

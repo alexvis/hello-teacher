@@ -1,0 +1,92 @@
+<% user_id = current_user.id %>
+
+<div class="translucent-form-overlay">
+
+  <%= form_for @school, html: { class: ''} do |f| %>
+    <% if @school.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
+
+        <ul>
+        <% @school.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.label :name, 'School Name' %><br/>
+    <%= f.text_field :name, required: true, autofocus: true %></br>
+
+    <%= f.label :address, 'School Address' %><br/>
+    <%= f.text_field :address, required: true, autofocus: true %></br>
+
+    <%= f.label :city, 'School City' %><br/>
+    <%= f.text_field :city, autofocus: true %>
+
+    <%= f.label :state, 'School State' %><br/>
+    <%= f.select(:state, options_for_select([
+      ['-', '-'],
+      ['Alaska', 'AK'],
+      ['Alabama', 'AL'],
+      ['Arkansas', 'AR'],
+      ['American Samoa', 'AS'],
+      ['California', 'CA'],
+      ['Colorado', 'CO'],
+      ['Connecticut', 'CT'],
+      ['District of Columbia', 'DC'],
+      ['Delaware', 'DE'],
+      ['Florida', 'FL'],
+      ['Georgia', 'GA'],
+      ['Hawaii', 'HI'],
+      ['Iowa', 'IA'],
+      ['Idaho', 'ID'],
+      ['Illinois', 'IL'],
+      ['Kansas', 'KS'],
+      ['Kentucky', 'KY'],
+      ['Louisiana', 'LA'],
+      ['Massachusetts', 'MA'],
+      ['Maryland', 'MD'],
+      ['Maine', 'ME'],
+      ['Michigan', 'MI'],
+      ['Minnesota', 'MN'],
+      ['Missouri', 'MO'],
+      ['Mississippi', 'MS'],
+      ['Montana', 'MT'],
+      ['North Carolina', 'NC'],
+      ['North Dakota', 'ND'],
+      ['Nebraska', 'NE'],
+      ['New Hampshire', 'NH'],
+      ['New Jersey', 'NJ'],
+      ['New Mexico', 'NM'],
+      ['Nevada', 'NV'],
+      ['New York', 'NY'],
+      ['Ohio', 'OH'],
+      ['Oklahoma', 'OK'],
+      ['Oregon', 'OR'],
+      ['Pennsylvania', 'PA'],
+      ['Puerto Rico', 'PR'],
+      ['Rhode Island', 'RI'],
+      ['South Carolina', 'SC'],
+      ['South Dakota', 'SD'],
+      ['Tennessee', 'TN'],
+      ['Texas', 'TX'],
+      ['Utah', 'UT'],
+      ['Virginia', 'VA'],
+      ['Virgin Islands', 'VI'],
+      ['Vermont', 'VT'],
+      ['Washington', 'WA'],
+      ['Wisconsin', 'WI'],
+      ['West Virginia', 'WV'],
+      ['Wyoming', 'WY'],
+
+      ])) %>
+
+    <%= f.label :zip_code %><br/>
+    <%= f.text_field :zip_code, autofocus: true %>
+
+    <%= f.hidden_field :user_id, value: user_id %>
+
+    <%= f.submit "Submit", class: 'button submit-button' %>
+  <% end %>
+</div>

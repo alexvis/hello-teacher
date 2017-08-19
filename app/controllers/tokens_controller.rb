@@ -34,10 +34,10 @@ class TokensController < ApplicationController
     @user_id = current_user.id
 
     token = Token.find(params[:id])
-    @school_id = token.student.school.id
-    @classroom_id = token.student.classroom.id
     token.destroy
     if current_user.teacher == true
+      @school_id = token.student.school.id
+      @classroom_id = token.student.classroom.id
       redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully delete!'
     else
       redirect_to user_path(current_user)

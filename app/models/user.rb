@@ -19,9 +19,9 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-  has_many :tokens
-  has_many :schools
-  has_many :classrooms
+  has_many :tokens, dependent: :destroy
+  has_many :schools, dependent: :destroy
+  has_many :classrooms, dependent: :destroy
 
   has_many :students, through: :tokens
 end

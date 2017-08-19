@@ -1,54 +1,65 @@
-  <% user_id = current_user.id %>
-  <div class="callout">
-    <h3>Search For A School</h3>
+<% user_id = current_user.id %>
+<div class="callout school-box">
+
+  <h3>Search For A School</h3>
+  <%= form_tag(user_schools_path(current_user), method: :get) do %>
+    <%= label :name, 'Search For School Name' %>
+    <%= text_field_tag :name, nil %>
+
     <%= form_tag(user_schools_path(current_user), method: :get) do %>
-
-      <%= label :name, 'Search For School Name' %>
-      <%= text_field_tag :name, nil %>
-
-      <%= form_tag(user_schools_path(current_user), method: :get) do %>
-        <%= label :address, 'Search For School Address' %>
-        <%= text_field_tag :address, nil %>
+      <%= label :address, 'Search For School Address' %>
+      <%= text_field_tag :address, nil %>
 
       <%= form_tag(user_schools_path(current_user), method: :get) do %>
         <%= label :zip_code, 'Search For School Zip Code' %>
         <%= text_field_tag :zip_code, nil %>
 
-       <%= submit_tag 'Search' %><br><br>
+      <%= submit_tag 'Search', class: 'button submit-button' %><br><br>
 
-       <% end %>
-     <% end %>
-    <% end %>
-
-     <% @result_school.each do |r| %>
-     <% if r.user.teacher? %>
-        <div class="callout">
-
-          <h3>School Name: <%= r.name %></h3>
-          <h3>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h3><br>
-          <h3>Teacher Name: <%= r.user.full_name %> </h3>
-            <h4>Classes:</h4>
-               <% r.classrooms.each do |c| %>
-                 <h5>Subject: <%= c.subject %> </h5>
-                 <h5>Grade: <%= c.grade %> </h5>
-                 <h5>Class Number: <%= c.class_number %> </h5>
-
-               <% end %>
-               <h5>To see your child Information add Token and ID:</h5>
-               <%= form_for @token, html: { class: ''} do |f| %>
-                 <%= f.label :token, 'Token' %>
-                 <%= f.text_field :token %>
-
-                 <%= f.hidden_field :user_id, value: user_id %>
-
-                 <%= f.label :student_id, 'Enter Student ID' %>
-                 <%= f.text_field :student_id %>
-
-                 <%= f.submit "Submit", class: 'new-user-form' %>
-                 <% end %>
-               <%= link_to 'School Information',  user_school_path(current_user, r) %>
-        </div>
-        <% end %>
       <% end %>
+    <% end %>
+  <% end %>
+  <div class="row">
+    <% @result_school.each do |r| %>
+    <div class="large-4 columns">
+      <% if r.user.teacher? %>
+        <div class="callout student-box">
+          <h5>Teacher Name: <%= r.user.full_name %> </h5>
+          <h5>School Name: <%= r.name %></h5>
+          <h5>School Address: <%= r.address %>, <%= r.state %> <%= r.zip_code %> </h5><br>
+          <h4>Classes:</h4>
+          <% r.classrooms.each do |c| %>
+            <h5>Subject: <%= c.subject %> </h5>
+            <h5>Grade: <%= c.grade %> </h5>
+            <h5>Class Number: <%= c.class_number %> </h5>
+          <% end %>
+            <h5>To see your child Information add Token and ID:</h5>
+            <%= form_for @token, html: { class: ''} do |f| %>
+              <% if @token.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@token.errors.count, "error") %> prohibited this token from being saved:</h2>
 
-    </div>
+                  <ul>
+                  <% @token.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <%= f.label :token, 'Token' %>
+              <%= f.text_field :token %>
+
+              <%= f.hidden_field :user_id, value: user_id %>
+
+              <%= f.label :student_id, 'Enter Student ID' %>
+              <%= f.text_field :student_id %>
+
+              <%= f.submit "Submit", class: 'button submit-button' %>
+            <% end %>
+            <%= link_to 'School Information',  user_school_path(current_user, r) %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

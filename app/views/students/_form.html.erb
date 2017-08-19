@@ -1,48 +1,43 @@
-
 <% school_id = @school_id  %>
 <% user_id =  current_user.id %>
 <% classroom_id =  @classroom_id %>
-  <div id="" class="translucent-form-overlay">
+<div id="" class="translucent-form-overlay">
+  <%= form_for @student, html: { class: ''} do |f| %>
+    <%= f.label :first_name, 'First Name' %><br/>
+    <%= f.text_field :first_name, required: true, autofocus: true %></br>
 
-      <%= form_for @student, html: { class: ''} do |f| %>
+    <%= f.label :last_name, 'Last Name' %><br/>
+    <%= f.text_field :last_name, required: true, autofocus: true %></br>
 
-          <%= f.label :first_name, 'First Name' %><br/>
-          <%= f.text_field :first_name, required: true, autofocus: true %></br>
+    <%= f.label :grade, 'Student Grade' %><br/>
+    <%= f.select(:grade, options_for_select([
+        ['-', '-'],
+        ['A+', 'A+'],
+        ['A', 'A'],
+        ['A-', 'A-'],
+        ['B+', 'B+'],
+        ['B', 'B'],
+        ['B-', 'B-'],
+        ['C+', 'C+'],
+        ['C', 'C'],
+        ['C-', 'C-'],
+        ['D+', 'D+'],
+        ['D', 'D'],
+        ['D-', 'D-'],
+        ['F OR E', 'F']
+      ]),required: true, autofocus: true)  %>
 
-          <%= f.label :last_name, 'Last Name' %><br/>
-          <%= f.text_field :last_name, required: true, autofocus: true %></br>
+    <label>Upload Picture</label>
+    <%= f.file_field :profile_photo %>
+    <div class="actions">
 
-          <%= f.label :grade, 'Student Grade' %><br/>
-          <%= f.select(:grade, options_for_select([
-              ['-', '-'],
-              ['A+', 'A+'],
-              ['A', 'A'],
-              ['A-', 'A-'],
-              ['B+', 'B+'],
-              ['B', 'B'],
-              ['B-', 'B-'],
-              ['C+', 'C+'],
-              ['C', 'C'],
-              ['C-', 'C-'],
-              ['D+', 'D+'],
-              ['D', 'D'],
-              ['D-', 'D-'],
-              ['F OR E', 'F']
+    <%= f.hidden_field :school_id, value: school_id %>
 
-          ]),required: true, autofocus: true)  %>
+    <%= f.hidden_field :user_id, value: user_id %>
 
-          <label>Upload Picture</label>
-          <%= f.file_field :profile_photo %>
-          <div class="actions">
-
-          <%= f.hidden_field :school_id, value: school_id %>
-
-          <%= f.hidden_field :user_id, value: user_id %>
-
-          <%= f.hidden_field :classroom_id, value: classroom_id %>
+    <%= f.hidden_field :classroom_id, value: classroom_id %>
 
 
-          <%= f.submit "Submit", class: 'new-user-form' %>
-      <% end %>
-
-    </div>
+    <%= f.submit "Submit", class: 'button submit-button' %>
+  <% end %>
+</div>

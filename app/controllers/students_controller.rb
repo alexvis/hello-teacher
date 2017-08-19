@@ -42,7 +42,6 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @school_id = @student.school_id
     @classroom_id = @student.classroom_id
-    # @classroom = Classroom.where(id: @classroom_id)
 
     if @student.update(student_params)
       redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show"
