@@ -1,5 +1,5 @@
-<div class="callout admid-box">
-  <h1 align="center">Admid Page</h1><br>
+<div class="callout admin-box">
+  <h1 align="center">Admin Page</h1><br>
   <h1>Users List</h1><br>
   <ul>
     <% @users.each do |user| %>
@@ -7,7 +7,7 @@
       <% if user.teacher == true %>
         <h5>Teacher</h5>
       <% end %>
-      <% if user.role == "admid" %>
+      <% if user.role == "admin" %>
         <h5>Admin</h5>
       <% end %>
       <% if user.teacher == false%>
