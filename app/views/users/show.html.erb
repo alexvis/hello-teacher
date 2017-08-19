@@ -110,7 +110,7 @@
                 <h3>Students List</h3>
                 <!-- School box student information -->
                 <% classroom.students.each do |student| %>
-                  <% parent = User.where(id: student.tokens[1].user_id) %>
+
                   <div class="callout">
                     <h5>Student Name: <%= student.full_name %> </h5>
                     <h5>Student Grade: <%= student.grade %> </h5>
@@ -119,8 +119,11 @@
                     <% if student.profile_photo? %>
                     <%= image_tag(student.profile_photo) %><br>
                     <% end %>
+                    <% if student.tokens.length >= 2%>
+                    <% parent = User.where(id: student.tokens[1].user_id) %>
                     <h5>Parent Name: <%= parent[0].full_name %></h5>
                     <%= image_tag(parent[0].profile_photo) %><br>
+                    <% end %>
 
                   </div>
                 <% end %>
