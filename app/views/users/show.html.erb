@@ -88,7 +88,7 @@
         <h3 id="<%= i %>" >School Name: <%= school.name %> </h3>
 
         <div id="<%= e %>" class="option" >
-          <div  class="callout classroom">
+          <div  class="callout school-box">
             <h5>School Info:</h5>
             <h5>Address: <%= school.address %> </h5>
             <h5>City: <%= school.city %> </h5>
@@ -98,9 +98,9 @@
             <p><%= link_to 'Edit School', edit_user_school_path(current_user, school) %></p>
 
             <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %></p>
-
+            <!-- Classroom box information -->
             <% school.classrooms.each do |classroom| %>
-              <div class="callout">
+              <div class="callout class-box">
 
                 <h4>Classroom Name: <%= classroom.subject %></h4>
                 <h4>Classroom Grade: <%= classroom.grade %></h4>
@@ -124,7 +124,6 @@
                     <h5>Parent Name: <%= parent[0].full_name %></h5>
                     <%= image_tag(parent[0].profile_photo) %><br>
                     <% end %>
-
                   </div>
                 <% end %>
               </div>

@@ -15,6 +15,7 @@
       <% end %>
       <h5>User Name: <%= user.full_name %> </h5>
       <h5>User email: <%= user.email %> </h5>
+      <%= image_tag(user.profile_photo) %>
 
       <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
     </div>
