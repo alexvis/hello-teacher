@@ -15,22 +15,31 @@
       <% end %>
       <h5>User Name: <%= user.full_name %> </h5>
       <h5>User email: <%= user.email %> </h5>
-      <%= image_tag(user.profile_photo) %>
+      <% if user.profile_photo? %>
+      <%= image_tag(user.profile_photo) %><br>
+      <% end %>
 
       <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+      <% if user.schools %>
+        <% user.schools.each do |school| %>
+          <div class="callout school-box">
+            <h5>School Name: <%= school.name %></h5>
+            <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+            <% if school.classrooms %>
+              <% school.classrooms.each do |c| %>
+                <div class="callout">
+                  <h4>Class Information:</h4>
+                  <h5><%= c.subject %></h5>
+                  <h5> <%= c.grade %> </h5>
+                  <h5><%= c.class_number %></h5>
+                  <%= link_to 'Delete Classroom', c, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-    <% end %>
-    <% @schools.each do |school| %>
-      <div class="callout school-box">
-        <h5>School Name: <%= school.name %></h5>
-        <%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-      </div>
-    <% end %>
-    <% @classrooms.each do |classroom| %>
-      <div class="callout classroom-box">
-        <h5>Classroom Name: <%= classroom.subject %></h5>
-        <%= link_to 'Delete Classroom', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-      </div>
     <% end %>
   </ul>
 </div>

@@ -18,7 +18,6 @@
          });
        });
 
-
     $(document).ready(function(){
      $(".option").hide();
 
@@ -35,39 +34,36 @@
   <body>
     <div class="top-bar" >
       <p class="menu-text ">Hello Teacher</p>
-        <div class="top-bar-right">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li>
-              <% if user_signed_in?  %>
-              <a href="#">menu</a>
-              <ul>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li>
+            <% if user_signed_in?  %>
+            <a href="#">menu</a>
+            <ul>
+              <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+              <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
+              <p><%= link_to 'My Account', user_path(current_user) %></p>
+              <p><%= link_to 'Search School', user_schools_path(current_user) %></p>
+            </ul>
+          </li>
 
-                <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
-                <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
-                <p><%= link_to 'My Account', user_path(current_user) %></p>
-                <p><%= link_to 'Search School', user_schools_path(current_user) %></p>
-              </ul>
-            </li>
-
-                  <% if current_user.admin? || current_user.teacher? %>
-                    <% if current_user.admin? %>
-                      <li> <%= link_to 'Admin', users_path %> </li>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                    <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
-                    <li><%= link_to "Sign Up", new_user_registration_path %></li>
-                <% end %>
-          </ul>
-        </div>
+            <% if current_user.admin? || current_user.teacher? %>
+              <% if current_user.admin? %>
+                <li> <%= link_to 'Admin', users_path %> </li>
+              <% end %>
+            <% end %>
+            <% else %>
+                <li class="right"><%= link_to "Sign In", new_user_session_path %></li>
+                <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <% end %>
+        </ul>
+      </div>
     </div>
-
 
     <div class="row">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
-
 
     <div class="row">
         <%= yield %>
