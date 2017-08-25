@@ -59,13 +59,22 @@
                 <h3>Teacher Name: <%= teacher[0].full_name %></h3><br>
                 <ul>
                   <li>Student Name: <%= t.student.full_name %></li><br>
-                  <li>Note: <%= t.student.grade %></li><br>
+                  <li>Grade: <%= t.student.grade %></li><br>
+                  <li>Last Upgrate: <%= t.student.updated_at.strftime("%m/%d/%Y") %> </li><br>
                   <%= image_tag(t.student.profile_photo) %><br><br>
                   <li>Token: <%= t.token %></li><br>
                   <li>Id: <%= t.student.id %> </li>
                   <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
-
                 </ul>
+                <h4>Teacher General Comments:</h4>
+                <% t.student.classroom.comments.each do |c| %>
+                  <div class="callout">
+                    <p><%= c.comment %></p><br>
+                    <p>Posted Date: <%= c.created_at.strftime("%m/%d/%Y") %> </p>
+
+                  </div>
+                <% end %>
+
               </div>
 
             <% end %>
@@ -100,11 +109,30 @@
             <p> <%= link_to 'Add classrooms', user_school_classroom_path(current_user, school ) %></p>
             <!-- Classroom box information -->
             <% school.classrooms.each do |classroom| %>
-              <div class="callout class-box">
 
+              <div class="callout class-box">
                 <h4>Classroom Name: <%= classroom.subject %></h4>
                 <h4>Classroom Grade: <%= classroom.grade %></h4>
                 <h4>Classroom Class Number: <%= classroom.class_number %></h4>
+                <!-- Classroom comments form -->
+                <%= form_for @comment, html: {class: ''} do |f| %>
+                  <%= f.label :comment, 'Class Comment' %>
+                  <%= f.text_area :comment, size: "60x6" %>
+
+                  <%= f.hidden_field :user_id, value: current_user.id %>
+
+                  <%= f.hidden_field :classroom_id, value: classroom.id%>
+
+
+                  <%= f.submit "Submit", class: 'button submit-button' %>
+                <% end %>
+                <h6>Teacher Comments:</h6><br>
+                <% classroom.comments.each do |comment| %>
+                  <div class="callout">
+                    <p><%= comment.comment %></p><br>
+                    <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y") %> </p>
+                  </div>
+                <% end %>
 
                 <p> <%= link_to 'Edit or add Students', user_school_classroom_student_path(current_user, school, classroom ) %></p>
                 <h3>Students List</h3>
@@ -114,14 +142,17 @@
                   <div class="callout">
                     <h5>Student Name: <%= student.full_name %> </h5>
                     <h5>Student Grade: <%= student.grade %> </h5>
-                    <h5>Token: <%= student.tokens[0].token %></h5>
+                    <% if student.tokens.length > 1 %>
+                      <h5>Token: <%= student.tokens[0].token %></h5>
+                    <% end %>
                     <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br>
                     <% if student.profile_photo? %>
-                    <%= image_tag(student.profile_photo) %><br>
+                    <%= image_tag(student.profile_photo) %><br><br><br>
                     <% end %>
                     <% if student.tokens.length >= 2%>
                     <% parent = User.where(id: student.tokens[1].user_id) %>
                     <h5>Parent Name: <%= parent[0].full_name %></h5>
+                    <h5>Email: <%= parent[0].email %></h5>
                     <%= image_tag(parent[0].profile_photo) %><br>
                     <% end %>
                   </div>
