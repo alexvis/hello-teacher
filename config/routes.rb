@@ -12,12 +12,20 @@ Rails.application.routes.draw do
   resources :classrooms
   resources :students
   resources :tokens
+  resources :comments
 
   resources :users do
     resources :schools do
       resources :classrooms do
         resources :students
       end
+    end
+  end
+
+  resources :classrooms do
+    resources :comments
+    resources :users do
+      resources :comments
     end
   end
 

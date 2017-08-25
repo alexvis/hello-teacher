@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
     @token = Token.new
     @tokens = Token.all
     @user = current_user
