@@ -50,19 +50,9 @@ body {
   height: 100%;
 }
 
- .panel {
-   border: 0.5em ridge yellow;
-   color: black;
-
- }
  .welcome-img{
    height: 25em; width: 340em;
  }
- .row{
-   background-color: rgba(54, 54, 54, 0.8);
- }
-
-
 
  .notice {
    width: 50%;
@@ -81,8 +71,8 @@ body {
  }
 
  img {
-   width: 12em;
-   height: 12em;
+   width: 6em;
+   height: 6em;
  }
 
  .new-user-form {
@@ -92,7 +82,7 @@ body {
  }
 
  .translucent-form-overlay {
-   max-width: 500px;
+   max-width: 40em;
    width: 100%;
    background-color: rgba(54, 54, 54, 0.8);
    padding: 20px;
@@ -101,7 +91,7 @@ body {
    margin-top: 2em;
  }
 
- .translucent-form-overlay .columns.row {
+ .translucent-form-overlay .columns {
    display: block;
  }
 

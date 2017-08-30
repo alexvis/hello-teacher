@@ -42,6 +42,8 @@ class SchoolsController < ApplicationController
  def show
    @school = School.find(params[:id])
    @user = @school.user
+   @comment = Comment.new
+
  end
 
  def create
