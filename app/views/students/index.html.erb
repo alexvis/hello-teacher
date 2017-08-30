@@ -1,1 +1,49 @@
-<h1>hello from student index</h1>
+<div class="school-box large-12 columns">
+  <h1>Classroom Subject: <%= @classroom[0].subject %> </h1>
+
+  <% school_id = @school_id  %>
+  <% user_id =  current_user.id %>
+  <% classroom_id =  @classroom_id %>
+
+  <div class="large-6 medium-6 small-12 columns">
+    <%@classroom.each do |c| %>
+      <% c.students.each do |s| %>
+        <div class="callout">
+          <!-- Student information -->
+          <h4>Student Name: <%= s.full_name %> </h4>
+          <h4>Student Grade: <%= s.grade %> </h4>
+          <h4>Student last Update: <%= s.updated_at.strftime("%m %d %Y") %> </h4>
+          <!-- Student profile picture if id one  -->
+          <% if s.profile_photo? %>
+          <%= image_tag(s.profile_photo) %><br>
+          <% end %>
+
+          <% if s.tokens.length >=1 %>
+            <h5>Student Token: <%= s.tokens[0].token %></h5>
+            <h5>Student Id: <%= s.id %></h5><br>
+          <% else %>
+            <%= form_for @token, html: { class: ''} do |f| %>
+              <%= f.label :token, 'Token' %>
+              <%= f.text_field :token %>
+
+              <%= f.hidden_field :user_id, value: user_id %>
+
+              <%= f.hidden_field :student_id, value: s.id %>
+
+              <%= f.submit "Submit", class: 'new-user-form' %>
+            <% end %>
+          <% end %>
+          <%= link_to 'Delete Token', s.tokens[0], method: :delete, data: { confirm: 'Are you sure?' } %><br>
+          <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, c, s ) %><br>
+          <%= link_to 'Delete Student', s, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+          <br><br>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="large-6 medium-6 small-12 columns">
+    <h3>Fill form to add Student</h3>
+    <%= render 'form', student: @student %>
+  </div>
+</div>

@@ -2,6 +2,12 @@ class StudentsController < ApplicationController
   before_action :authorize_user, only: [:destroy]
 
   def index
+    @student = Student.new
+    @user_id = params["user_id"]
+    @school_id = params["school_id"]
+    @classroom_id = params["classroom_id"]
+    @classroom = Classroom.where(id: @classroom_id)
+    @token = Token.new
   end
 
   def show
