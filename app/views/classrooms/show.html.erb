@@ -1,31 +1,70 @@
-<h3>Classes</h3>
+<div class="school-box large-12 columns">
+  <!-- Classroom box information -->
 
 
-<% school_id = @school_id  %>
-<% user_id =  current_user.id %>
+    <div class="callout class-box large-4 medium-4 small-12 columns">
+      <h4>Classroom info:</h4>
+      <h5>Name: <%= @classroom.subject %></h5>
+      <h5>Grade: <%= @classroom.grade %></h5>
+      <h5>Class Number: <%= @classroom.class_number %></h5>
+      <!-- Classroom comments form -->
+      <%= form_for @comment, html: {class: ''} do |f| %>
+        <%= f.label :comment, 'Class Comment' %>
+        <%= f.text_area :comment, size: "60x6" %>
 
-  <% @school.each do |s| %>
-  <div class="large-6 columns">
-    <% s.classrooms.each do |c| %>
-    <div class="callout">
+        <%= f.hidden_field :user_id, value: current_user.id %>
 
-      <h4>Subject: <%= c.subject %></h4>
-      <h4>Grade: <%= c.grade %></h4>
-      <h4>Classroom Number: <%= c.class_number %></h4><br>
-      <%= link_to 'Add Student To Your Class', user_school_classroom_student_path(current_user, s, c ) %><br>
-      <%= link_to 'Edit Classroom', edit_user_school_classroom_path(user_id, @school_id, c ) %><br>
-      <%= link_to 'Delete classroom', c, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+        <%= f.hidden_field :classroom_id, value: @classroom.id%>
+
+
+        <%= f.submit "Submit", class: 'button submit-button' %>
+      <% end %>
+    </div>
+    <!-- Teacher comment box -->
+    <div class="large-4 medium-4 small-12 columns comment">
+      <div class="callout">
+        <h6>Teacher Comments:</h6><br>
+        <% @classroom.comments.reverse.each do |comment| %>
+        <div class="callout">
+          <p><%= comment.comment %></p><br>
+          <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %> </p>
+          <p> <%= link_to 'Delete Comment', comment, method: :delete, data: {confirm: 'Are you sure?'} %> </p>
+        </div>
+        <% end %>
+      </div>
     </div>
 
-    <% end %>
-  </div>
-  <% end %>
+    <!-- Student information -->
+    <div class="callout large-12 medium-12 small-12 columns">
+      <p> <%= link_to 'Edit or add Students', user_school_classroom_students_path(current_user, @school_id, @classroom ) %></p>
+      <h3>Students List</h3>
+      <% @classroom.students.each do |student| %>
+        <div class="large-4 medium-4 small-12 columns">
+          <div class="callout">
 
-<div class="large-6 small-12 columns">
-  <h3>Add Classroom</h3>
-
-<div class="translucent-form-overlay">
-  <%= render 'form', classroom: @classroom %>
-</div>
+            <h5>Student Name: <%= student.full_name %> </h5>
+            <h5>Student Grade: <%= student.grade %> </h5>
+            <% if student.tokens.length > 1 %>
+            <h5>Token: <%= student.tokens[0].token %></h5>
+            <% end %>
+            <h5>Student last Update: <%= student.updated_at.strftime("%m/%d/%Y") %></h5><br>
+            <% if student.profile_photo? %>
+            <%= image_tag(student.profile_photo) %><br><br><br>
+            <% end %>
+            <!-- student parents info -->
+            <% if student.tokens.length >= 2%>
+            <% parent = User.where(id: student.tokens[1].user_id) %>
+            <% parent.each do |parent| %>
+            <h6>Parent Name: <%= parent.full_name %></h6>
+            <h6>Email:</h6> <p><%= parent.email %></p>
+            <% if parent.profile_photo? %>
+            <%= image_tag(parent.profile_photo) %><br>
+            <% end %>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
 </div>

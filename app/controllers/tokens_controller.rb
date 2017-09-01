@@ -20,10 +20,10 @@ class TokensController < ApplicationController
       @classroom_id = @token.user.schools[0].classrooms[0].id
 
       if @token.token == ''
-        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token can\'t be empty!'
+        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students", notice: 'Student token can\'t be empty!'
       else
         @token.save
-          redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully added!'
+          redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students", notice: 'Student token was successfully added!'
       end
     end
 
@@ -38,7 +38,7 @@ class TokensController < ApplicationController
     if current_user.teacher == true
       @school_id = token.student.school.id
       @classroom_id = token.student.classroom.id
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student token was successfully delete!'
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students", notice: 'Student token was successfully delete!'
     else
       redirect_to user_path(current_user)
     end
