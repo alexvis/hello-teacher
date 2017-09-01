@@ -1,38 +1,33 @@
-
-
 <div class="school-box large-12 columns">
 
-<h3>Classes</h3>
+  <h3>Classes</h3>
 
+  <% school_id = @school_id  %>
+  <% user_id =  current_user.id %>
+  <% @school.each do |s| %>
+    <div class="large-6 medium-6 columns">
+      <% s.classrooms.each do |c| %>
+      <div class="callout">
 
-<% school_id = @school_id  %>
-<% user_id =  current_user.id %>
+        <h4>Subject: <%= c.subject %></h4>
+        <h4>Grade: <%= c.grade %></h4>
+        <h4>Classroom Number: <%= c.class_number %></h4><br>
+        <%= link_to 'Add Student To Your Class', user_school_classroom_students_path(current_user, s, c ) %><br>
+        <%= link_to 'Edit Classroom', edit_user_school_classroom_path(user_id, @school_id, c ) %><br>
+        <%= link_to 'Delete classroom', c, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+        <%= link_to 'Classroom info', user_school_classroom_path(user_id, @school_id, c.id ) %><br>
 
-<% @school.each do |s| %>
-  <div class="large-6 columns">
-    <% s.classrooms.each do |c| %>
-    <div class="callout">
+      </div>
 
-      <h4>Subject: <%= c.subject %></h4>
-      <h4>Grade: <%= c.grade %></h4>
-      <h4>Classroom Number: <%= c.class_number %></h4><br>
-      <%= link_to 'Add Student To Your Class', user_school_classroom_students_path(current_user, s, c ) %><br>
-      <%= link_to 'Edit Classroom', edit_user_school_classroom_path(user_id, @school_id, c ) %><br>
-      <%= link_to 'Delete classroom', c, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-      <%= link_to 'Classroom info', user_school_classroom_path(user_id, @school_id, c.id ) %><br>
+      <% end %>
+    </div>
+  <% end %>
 
+  <div class="large-6 medium-6 small-12 columns">
+    <h4>Add Classroom</h4>
+    <div class="translucent-form-overlay">
+      <%= render 'form', classroom: @classroom %>
     </div>
 
-    <% end %>
   </div>
-<% end %>
-
-<div class="large-6 small-12 columns">
-  <h3>Add Classroom</h3>
-
-  <div class="translucent-form-overlay">
-    <%= render 'form', classroom: @classroom %>
-  </div>
-
-</div>
 </div>

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "Hello Teacher" %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <%= stylesheet_link_tag    "application" %>
     <%= stylesheet_link_tag    "app" %>
@@ -17,14 +18,16 @@
       <p class="menu-text ">Hello Teacher</p>
       <div class="top-bar-right">
         <ul class="dropdown menu" data-dropdown-menu>
+          <li> <%= link_to 'Back', url_for(:back) %> </li>
           <li>
             <% if user_signed_in?  %>
+
             <a href="#">menu</a>
             <ul>
-              <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
               <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
               <p><%= link_to 'My Account', user_path(current_user) %></p>
-              <p><%= link_to 'Search School', user_schools_path(current_user) %></p>
+              <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+
             </ul>
           </li>
 
@@ -47,11 +50,13 @@
     </div>
 
     <div class="row">
-
       <%= yield %>
-      
     </div>
 
+    <div class="footer large-12 medium-12 small-12 columns">
+      <a class="fa fa-github" href="https://github.com/alexvis"></a>
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/avisconde"></a>
+    </div>
 
   </body>
 </html>
