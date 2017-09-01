@@ -1,8 +1,8 @@
 <div class="school-box large-12 columns" >
   <!-- user info box -->
-  <div class=" large-4  medium-4 columns">
-    <div class="callout">
-      <h4 class="user_name">Hello <%= current_user.full_name %></h4>
+  <div class=" large-4  medium-6 columns">
+    <div class="callout user-info">
+      <p class="user_name">Hello <%= current_user.first_name %></p>
       <% school = @schools %>
 
       <%= form_for current_user, html: { multipart: true } do |f| %>
@@ -74,9 +74,7 @@
 
                   </div>
                 <% end %>
-
               </div>
-
             <% end %>
           <% end %>
         <% end %>
@@ -86,29 +84,32 @@
 
   <!-- teacher school form and school info box -->
   <% if current_user.admin? || current_user.teacher? %>
-    <div class="large-4 medium-4 small-12 columns">
+    <div class="large-4 medium-6 small-12 columns">
       <div class="callout">
 
         <p>In this page you would see an add school form,
           in that form you can add your school, when finish press the
           school bus </p>
       </div>
-    </div>
-    <!-- School list -->
-    <div class="small-12 medium-4 large-4 columns">
-      <div class="callout school-list">
+      <!-- School list -->
+      <% if @schools.length >= 1 %>
+        <div class="callout school-list">
 
-        <% @schools.each do |school| %>
-        <div class="callout">
-          <h3> <%= school.name %> </h3>
-          <p><%= link_to 'School Information', user_school_path(current_user, school) %> </p>
+          <% @schools.each do |school| %>
+          <div class="callout">
+            <h4>School info:</h4>
+            <p class="school-info"><%= school.name %></p>
+            <p class="school-info"><%= school.address %></p>
+            <p class="school-info"> <%= school.city %>, <%= school.state %> <%= school.zip_code %></p>
+            <p><%= link_to 'Add Classrooms', user_school_classrooms_path(current_user, school) %> </p>
+          </div>
+          <% end %>
         </div>
-        <% end %>
-      </div>
+      <% end %>
     </div>
     <!-- Add school form -->
     <% user_id = @user.id %>
-    <div class="small-12 large-12 medium-12 columns form">
+    <div class="small-12 large-4 medium-6 columns form">
       <div class="translucent-form-overlay">
 
         <%= form_for @school, html: { class: ''} do |f| %>

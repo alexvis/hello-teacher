@@ -8,13 +8,29 @@
   padding: 0.9rem;
 }
 
-.school-box{
-  background-color: #C2EAF5;
+div.school-list{
+  max-height: 30em;
+  overflow: auto;
 }
+.user-info{
+width: 12em;
+height: 10em;
+
+}
+
+div.form{
+  position: static;
+  float: left;
+}
+
 .student-box{
   background-color: #8DD5E9;
 }
 
+.comment{
+  max-height: 35em;
+  overflow: auto;
+}
 .center{
   text-align: center;
   color: white;
@@ -71,8 +87,8 @@ body {
  }
 
  img {
-   width: 6em;
-   height: 6em;
+   width: 4em;
+   height: 4em;
  }
 
  .new-user-form {

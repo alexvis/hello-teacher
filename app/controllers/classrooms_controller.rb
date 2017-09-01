@@ -3,16 +3,15 @@ class ClassroomsController < ApplicationController
 
 
   def index
-    @classrooms = Classroom.all
-    @classroom = Classroom.new
-
-  end
-
-  def show
     @classroom = Classroom.new
     @school_id = params["school_id"]
     @school = School.where(id: @school_id)
+  end
 
+  def show
+    @classroom = Classroom.find(params[:id])
+    @school_id = params["school_id"]
+    @comment = Comment.new
   end
 
   def create
@@ -23,6 +22,7 @@ class ClassroomsController < ApplicationController
       redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show"
     else
       render 'show.html.erb'
+      flash[:notice] = "not good"
     end
   end
 

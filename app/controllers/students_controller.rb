@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
     @student.save
     if @student.save
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student.id}",
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students",
       notice: "Student successfully added"
 
     else
