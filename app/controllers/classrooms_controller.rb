@@ -19,10 +19,10 @@ class ClassroomsController < ApplicationController
     @school = @classroom.school_id
     @user_id = current_user.id
     if @classroom.save
-      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show"
+      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms"
     else
-      render 'show.html.erb'
-      flash[:notice] = "not good"
+      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms"
+      flash[:notice] = "Please fill all fields!"
     end
   end
 
@@ -38,7 +38,7 @@ class ClassroomsController < ApplicationController
     @school = @classroom.school_id
 
     if @classroom.update(classroom_params)
-      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show"
+      redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/#{@classroom.id}"
     else
       render 'show.html.erb'
     end
@@ -61,7 +61,7 @@ class ClassroomsController < ApplicationController
     @school = @classroom.school_id
 
     @classroom.destroy
-    redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms/show", notice: 'User was successfully destroyed!'
+    redirect_to "/users/#{@user_id}/schools/#{@school}/classrooms", notice: 'User was successfully destroyed!'
   end
 
   private

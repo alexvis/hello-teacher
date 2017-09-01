@@ -1,46 +1,56 @@
+<div class="school-box large-12 medium-12 columns">
 
-<div class="translucent-form-overlay">
-
+  <div class="translucent-form-overlay">
     <h3 align="center">Edit profile for <%= current_user.full_name %> </h3>
-      <%= form_for(current_user, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+    <%= form_for(current_user, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="large-6 medium-6 columns">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="large-6 medium-6 columns">
 
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </div>
 
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name %>
+      <div class="large-12 columns">
 
-          <%= f.label :email %>
-          <%= f.email_field :email %>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+      <div class="large-12 columns">
 
         <% if(current_user.profile_photo?) %>
-          <img src="<%= current_user.profile_photo %>" alt="">
-            <%= f.label :profile_photo %>
-            <%= f.file_field :profile_photo %>
+        <img src="<%= current_user.profile_photo %>" >
+        <%= f.label :profile_photo %>
+        <%= f.file_field :profile_photo %>
+        <% end %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <div class="large-12 columns">
+        <i>Please enter your current password to confirm your changes.</i><br>
+        <%= f.password_field :current_password, autocomplete: "off" %>
+
+        <%= f.submit "Update", class: 'button submit-button' %>
+      </div>
+      <div class="large-12 columns">
+
+        <h6 style="color: red">Change Your Password</h6>
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+        <em style="color: red"><%= @minimum_password_length %> characters minimum</em>
         <% end %>
 
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
-
-          <%= f.label :current_password %> <i>Please enter your current password to confirm your changes.</i><br>
-          <%= f.password_field :current_password, autocomplete: "off" %>
-
-          <%= f.submit "Update", class: 'button submit-button' %>
-
-
-        <h6>Change Your Password</h6><br>
-          <%= f.label :password %><br>
-          <%= f.password_field :password, autocomplete: "off" %>
-          <% if @minimum_password_length %>
-                  <em><%= @minimum_password_length %> characters minimum</em>
-          <% end %>
-
-          <%= f.label :password_confirmation %><br>
-          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
     <% end %>
-
-    <h6>Cancel My Account</h6>
-    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      <h6 style="color: red">Cancel My Account</h6>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
   </div>
+</div>

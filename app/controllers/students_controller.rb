@@ -11,7 +11,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.new
+    @student = Student.find(params[:id])
     @user_id = params["user_id"]
     @school_id = params["school_id"]
     @classroom_id = params["classroom_id"]
@@ -50,9 +50,9 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
 
     if @student.update(student_params)
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show"
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student.id}"
     else
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show"
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{@student.id}"
     end
   end
 
@@ -64,7 +64,7 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
     student = Student.find(params[:id])
     student.destroy
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/show", notice: 'Student was successfully delete!'
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students", notice: 'Student was successfully delete!'
   end
 
     private

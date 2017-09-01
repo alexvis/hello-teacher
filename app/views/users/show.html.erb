@@ -1,4 +1,4 @@
-<div class="school-box large-12 columns" >
+<div class="school-box large-12 medium-12 columns" >
   <!-- user info box -->
   <div class=" large-4  medium-6 columns">
     <div class="callout user-info">
@@ -101,7 +101,8 @@
             <p class="school-info"><%= school.name %></p>
             <p class="school-info"><%= school.address %></p>
             <p class="school-info"> <%= school.city %>, <%= school.state %> <%= school.zip_code %></p>
-            <p><%= link_to 'Add Classrooms', user_school_classrooms_path(current_user, school) %> </p>
+            <p class="school-info"><%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p class="school-info"><%= link_to 'Add Classrooms', user_school_classrooms_path(current_user, school) %> </p>
           </div>
           <% end %>
         </div>

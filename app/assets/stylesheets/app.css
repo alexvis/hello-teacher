@@ -1,4 +1,31 @@
+.footer {
+  background-color: #E5473C;
+  height: 8em;
+  text-align: center;
+  margin-bottom: 0em;
 
+}
+p.callout{
+  text-align: center;
+}
+.fa-github{
+  margin-right: 4em;
+  margin-top: 1em;
+  font-size: 2em;
+  color: black;
+}
+.row{
+  height: 100vh;
+  margin-top: -1em;
+}
+
+.fa-linkedin{
+  font-size: 2em
+}
+.picture{
+  float: right;
+
+}
 .class-box{
   background-color: #DCDCBC;
 }
@@ -12,6 +39,11 @@ div.school-list{
   max-height: 30em;
   overflow: auto;
 }
+
+p.school-info{
+  text-decoration: underline;
+}
+
 .user-info{
 width: 12em;
 height: 10em;
@@ -24,9 +56,11 @@ div.form{
 }
 
 .student-box{
-  background-color: #8DD5E9;
+  max-height: 21em;
 }
-
+.student{
+  margin: -5px;
+}
 .comment{
   max-height: 35em;
   overflow: auto;
@@ -38,6 +72,7 @@ div.form{
 
 .school-box{
   background-color: #F7F7EC;
+
 }
 
 .menu-text{
