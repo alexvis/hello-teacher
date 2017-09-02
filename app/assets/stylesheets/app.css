@@ -3,7 +3,11 @@
   height: 8em;
   text-align: center;
   margin-bottom: 0em;
+}
 
+div.change-password{
+border-top: solid 2px white;
+border-bottom: solid 2px white;
 }
 p.callout{
   text-align: center;

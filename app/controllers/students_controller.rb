@@ -65,7 +65,7 @@ class StudentsController < ApplicationController
     @classroom_id = @student.classroom_id
     student = Student.find(params[:id])
     student.destroy
-      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students", notice: 'Student was successfully delete!'
+      redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}", notice: 'Student was successfully delete!'
   end
 
     private

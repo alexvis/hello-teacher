@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   resources :schools
   resources :classrooms
   resources :students
-  resources :tokens
-  resources :comments
+  resources :tokens, only: [:destroy, :create]
+  resources :comments, only: [:destroy, :create]
 
   resources :users do
     resources :schools do
@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   end
 
   resources :classrooms do
-    resources :comments
+    resources :comments, only: [:destroy, :create]
     resources :users do
-      resources :comments
+      resources :comments, only: [:destroy, :create]
     end
   end
 
@@ -45,24 +45,4 @@ Rails.application.routes.draw do
     end
   end
 
-
 end
-
-#
-# get 'home/show'
-#
-#   get 'auth/:provider/callback', to: 'sessions#create'
-#   get 'auth/failure', to: redirect('/')
-#   get 'signout', to: 'sessions#destroy', as: 'signout'
-#
-#   resources :sessions, only: [:create, :destroy]
-#   resource :home, only: [:show]
-#
-#   namespace :api do
-#     namespace :v1 do
-#       resources :decks, only: [:index, :show, :create, :update]
-#     end
-#   end
-#
-#   root to: "home#show"
-# end
