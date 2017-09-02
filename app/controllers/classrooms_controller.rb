@@ -12,6 +12,7 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.find(params[:id])
     @school_id = params["school_id"]
     @comment = Comment.new
+  
   end
 
   def create

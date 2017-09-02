@@ -19,7 +19,8 @@
 
           <%= link_to 'Student Info', user_school_classroom_student_path(user_id, @school_id, c, s) %> |
           <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, c, s ) %> |
-          <%= link_to 'Delete Student', s, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete Student', s, method: :delete, data: { confirm: 'Are you sure?' } %> |
+          <%= link_to 'Class Info', user_school_classroom_path(user_id, @school_id, c) %>
           <br><br>
         </div>
       <% end %>

@@ -1,30 +1,39 @@
 <div class="school-box large-12 medium-12 columns" >
-  <!-- user info box -->
-  <div class=" large-4  medium-6 columns">
-    <div class="callout user-info">
-      <p class="user_name">Hello <%= current_user.first_name %></p>
-      <% school = @schools %>
 
-      <%= form_for current_user, html: { multipart: true } do |f| %>
-        <p>
-        <%= image_tag(current_user.profile_photo) if current_user.profile_photo? %>
-        <% if current_user.profile_photo? %>
-        <% else %>
-          <label>Upload Picture</label>
-          <%= f.file_field :profile_photo %>
-          <div class="actions">
-            <%= f.submit "Upload Picture" %>
-          </div>
-          <% end %>
-        </p>
-      <% end %>
-    </div>
-  </div>
   <!-- parent Information box -->
   <% if !current_user.teacher && current_user.role != "admin" %>
-    <div class="large-8 medium-7 columns">
-      <div class="callout">
-        <h3>Search for School to find your child teacher</h3>
+      <div class="callout large-8 columns">
+        <% if current_user.tokens %>
+          <% current_user.tokens.each do |t| %>
+            <!-- Student information array  -->
+            <% if t.student != nil%>
+              <% teacher = User.where(id: t.student.user_id) %>
+              <div class="callout large-12 columns">
+                <ul>
+                  <h5>Teacher Name: <%= teacher[0].full_name %></h5>
+                  <p>Student Name: <%= t.student.full_name %></p>
+                  <p>Grade: <%= t.student.grade %></p>
+                  <p>Last Upgrate: <%= t.student.updated_at.strftime("%m/%d/%Y %H:%M") %></p>
+                  <%= image_tag(t.student.profile_photo) %>
+                  <p>Token: <%= t.token %></p>
+                  <p>Id: <%= t.student.id %> </p>
+                  <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+                </ul>
+                <h5>Teacher Comments:</h5>
+                <% t.student.classroom.comments.each do |c| %>
+                  <div class="callout school-list">
+                    <p><%= c.comment %></p>
+                    <p>Posted Date: <%= c.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="callout large-4 columns">
+        <h5>Enter token and id to find your child teacher</h5>
         <% user_id = current_user.id %>
         <%= form_for @token, html: { class: ''} do |f| %>
           <% if @token.errors.any? %>
@@ -47,38 +56,8 @@
 
           <%= f.submit "Submit", class: 'button submit-button' %>
         <% end %>
-        <%= link_to 'Search School', user_schools_path(current_user) %>
       </div>
-      <div class="callout">
-        <% if current_user.tokens %>
-          <% current_user.tokens.each do |t| %>
-            <!-- Student information array  -->
-            <% if t.student != nil%>
-              <% teacher = User.where(id: t.student.user_id) %>
-              <div class="callout student-box">
-                <h3>Teacher Name: <%= teacher[0].full_name %></h3><br>
-                <ul>
-                  <li>Student Name: <%= t.student.full_name %></li><br>
-                  <li>Grade: <%= t.student.grade %></li><br>
-                  <li>Last Upgrate: <%= t.student.updated_at.strftime("%m/%d/%Y") %> </li><br>
-                  <%= image_tag(t.student.profile_photo) %><br><br>
-                  <li>Token: <%= t.token %></li><br>
-                  <li>Id: <%= t.student.id %> </li>
-                  <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
-                </ul>
-                <h4>Teacher General Comments:</h4>
-                <% t.student.classroom.comments.each do |c| %>
-                  <div class="callout">
-                    <p><%= c.comment %></p><br>
-                    <p>Posted Date: <%= c.created_at.strftime("%m/%d/%Y") %> </p>
 
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
     </div>
   <% end %>
 
@@ -101,8 +80,11 @@
             <p class="school-info"><%= school.name %></p>
             <p class="school-info"><%= school.address %></p>
             <p class="school-info"> <%= school.city %>, <%= school.state %> <%= school.zip_code %></p>
+            <% school.classrooms.each do |c| %>
+              <p class="school-info"> <%= link_to "#{c.subject}", user_school_classroom_path(current_user, school, c) %> </p>
+            <% end %>
+            <p class="school-info"><%= link_to 'Add or Delete Classrooms', user_school_classrooms_path(current_user, school) %> </p>
             <p class="school-info"><%= link_to 'Delete School', school, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-            <p class="school-info"><%= link_to 'Add Classrooms', user_school_classrooms_path(current_user, school) %> </p>
           </div>
           <% end %>
         </div>

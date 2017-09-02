@@ -8,10 +8,13 @@
 p.callout{
   text-align: center;
 }
+.subject-comment-box{
+  text-decoration: underline;
+}
 .fa-github{
   margin-right: 4em;
   margin-top: 1em;
-  font-size: 2em;
+  font-size: 1.6em;
   color: black;
 }
 .row{
@@ -20,10 +23,14 @@ p.callout{
 }
 
 .fa-linkedin{
-  font-size: 2em
+  font-size: 1.6em
 }
 .picture{
   float: right;
+  width: 2.3em;
+  height: 2.3em;
+  margin-left: 1em;
+  margin-right: 1em;
 
 }
 .class-box{
@@ -104,8 +111,19 @@ body {
  .welcome-img{
    height: 25em; width: 340em;
  }
-
+.comment{
+  border-top: solid 1px black;
+}
  .notice {
+   width: 50%;
+   margin: auto;
+   padding-bottom: 12px;
+   background-color: white;
+   color: red;
+   font-size: 1em;
+   text-align: center;
+ }
+ .alert{
    width: 50%;
    margin: auto;
    background-color: white;
