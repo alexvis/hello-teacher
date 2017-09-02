@@ -19,14 +19,12 @@
         <%= f.label :email %>
         <%= f.email_field :email %>
       </div>
-      <div class="large-12 columns">
 
-        <% if(current_user.profile_photo?) %>
-        <img src="<%= current_user.profile_photo %>" >
-        <%= f.label :profile_photo %>
-        <%= f.file_field :profile_photo %>
-        <% end %>
-      </div>
+        <div class="large-12 columns">
+          <%= f.label :profile_photo %>
+          <%= f.file_field :profile_photo %>
+        </div>
+
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -37,7 +35,7 @@
 
         <%= f.submit "Update", class: 'button submit-button' %>
       </div>
-      <div class="large-12 columns">
+      <div class="large-12 columns change-password">
 
         <h6 style="color: red">Change Your Password</h6>
         <%= f.label :password %>

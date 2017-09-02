@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
-  def index
-  end
 
-  def show
-  end
+
   def destroy
     comment = Comment.find(params[:id])
     school_id = comment.classroom.school_id
