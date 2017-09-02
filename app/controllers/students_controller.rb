@@ -17,6 +17,7 @@ class StudentsController < ApplicationController
     @classroom_id = params["classroom_id"]
     @classroom = Classroom.where(id: @classroom_id)
     @token = Token.new
+    @comment = Comment.new
   end
 
   def create

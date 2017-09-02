@@ -16,20 +16,23 @@
   <body>
     <div class="top-bar" >
       <p class="menu-text ">Hello Teacher</p>
+      <% if current_user %>
+        <%= image_tag(current_user.profile_photo, class: 'picture') if current_user.profile_photo? %>
+      <% end %>
       <div class="top-bar-right">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li> <%= link_to 'Back', url_for(:back) %> </li>
-          <li>
-            <% if user_signed_in?  %>
+          <% if user_signed_in?  %>
+            <li>
 
-            <a href="#">menu</a>
-            <ul>
-              <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
-              <p><%= link_to 'My Account', user_path(current_user) %></p>
-              <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+              <a href="#">menu</a>
+              <ul>
+                <p><%= link_to 'My Account', user_path(current_user) %></p>
+                <p><%= link_to 'Back', url_for(:back) %></p>
+                <p><%= link_to 'Edit Account Info', edit_user_registration_path %></p>
+                <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
 
-            </ul>
-          </li>
+              </ul>
+            </li>
 
             <% if current_user.admin? || current_user.teacher? %>
               <% if current_user.admin? %>
@@ -54,8 +57,8 @@
     </div>
 
     <div class="footer large-12 medium-12 small-12 columns">
-      <a class="fa fa-github" href="https://github.com/alexvis"></a>
-      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/avisconde"></a>
+      <a class="fa fa-github" href="https://github.com/alexvis"> Github</a>
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/avisconde"> Linkedin</a>
     </div>
 
   </body>
