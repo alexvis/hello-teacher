@@ -1,5 +1,4 @@
 <div class="school-box large-12 medium-12 columns" >
-
   <!-- parent Information box -->
   <% if !current_user.teacher && current_user.role != "admin" %>
       <div class="callout large-8 columns">
@@ -14,18 +13,30 @@
                   <p>Student Name: <%= t.student.full_name %></p>
                   <p>Grade: <%= t.student.grade %></p>
                   <p>Last Upgrate: <%= t.student.updated_at.strftime("%m/%d/%Y %H:%M") %></p>
-                  <%= image_tag(t.student.profile_photo) %>
+                  <%= image_tag(t.student.profile_photo) if (t.student.profile_photo?) %>
                   <p>Token: <%= t.token %></p>
                   <p>Id: <%= t.student.id %> </p>
                   <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
                 </ul>
-                <h5>Teacher Comments:</h5>
-                <% t.student.classroom.comments.each do |c| %>
-                  <div class="callout school-list">
-                    <p><%= c.comment %></p>
-                    <p>Posted Date: <%= c.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+                <h5>Teacher Class Comments:</h5>
+                <% t.student.classroom.comments.each do |comment| %>
+                  <% if comment.student_id == nil %>
+                    <div class="callout large-6 columns">
+                      <p class="subject-comment-box">Subject: <%= comment.subject %></p>
+                      <p><%= comment.comment %></p>
+                      <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+                      <p> <%= link_to 'Delete Comment', comment, method: :delete, data: {confirm: 'Are you sure?'} %></p>
+                    </div>
+                  <% else %>
+                    <h5>Teacher direct message:</h5>
+                    <div class="callout large-6 columns">
+                      <p class="subject-comment-box">Subject: <%= comment.subject %></p>
+                      <p><%= comment.comment %></p>
+                      <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+                      <p> <%= link_to 'Delete Comment', comment, method: :delete, data: {confirm: 'Are you sure?'} %></p>
+                    </div>
+                  <% end %>
 
-                  </div>
                 <% end %>
               </div>
             <% end %>

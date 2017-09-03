@@ -15,6 +15,10 @@ p.callout{
 .subject-comment-box{
   text-decoration: underline;
 }
+.student-info{
+  border-bottom: solid 1px black;
+  margin: 1em 0em 1em 0em;
+}
 .fa-github{
   margin-right: 4em;
   margin-top: 1em;
@@ -48,6 +52,9 @@ p.callout{
 
 div.school-list{
   max-height: 30em;
+  overflow: auto;
+}
+.parent{
   overflow: auto;
 }
 
