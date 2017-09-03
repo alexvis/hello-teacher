@@ -1,5 +1,5 @@
 class ClassroomsController < ApplicationController
- before_action :authorize_user, only: [:destroy, :create, :update, :edit]
+ before_action :authorize_user
 
 
   def index
@@ -12,7 +12,7 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.find(params[:id])
     @school_id = params["school_id"]
     @comment = Comment.new
-  
+
   end
 
   def create

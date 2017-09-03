@@ -10,7 +10,7 @@ class TokensController < ApplicationController
       @token.save
       redirect_to user_path(current_user)
     if !@token.save
-      flash[:notice] = "not valid token or id "
+      flash[:notice] = "Not valid token or id "
     end
 
     else
@@ -20,9 +20,11 @@ class TokensController < ApplicationController
       @classroom_id = @token.user.schools[0].classrooms[0].id
       if @token.token == ''
         redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{student_id}", notice: 'Student token can\'t be empty!'
+      elsif !@token.save
+        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{student_id}", notice: "Not valid token or id "
       else
         @token.save
-          redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{student_id}", notice: 'Student token was successfully added!'
+        redirect_to "/users/#{@user_id}/schools/#{@school_id}/classrooms/#{@classroom_id}/students/#{student_id}", notice: 'Student token was successfully added!'
       end
     end
 

@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authorize_user, only: [:destroy]
+  before_action :authorize_user
 
   def index
     @student = Student.new
@@ -18,6 +18,7 @@ class StudentsController < ApplicationController
     @classroom = Classroom.where(id: @classroom_id)
     @token = Token.new
     @comment = Comment.new
+    @comments = Comment.where(student_id: @student.id)
   end
 
   def create
