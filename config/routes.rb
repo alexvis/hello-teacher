@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :classrooms
   resources :students
   resources :tokens, only: [:destroy, :create]
-  resources :comments, only: [:destroy, :create]
+  resources :comments, only: [:destroy, :create, :update]
 
   resources :users do
     resources :schools do
@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   end
 
   resources :classrooms do
-    resources :comments, only: [:destroy, :create]
+    resources :comments, only: [:destroy, :create, :update]
     resources :users do
-      resources :comments, only: [:destroy, :create]
+      resources :comments, only: [:destroy, :create, :update]
     end
   end
 

@@ -55,6 +55,8 @@ div.school-list{
   overflow: auto;
 }
 .parent{
+  max-height: 21.9em;
+
   overflow: auto;
 }
 
@@ -122,9 +124,7 @@ body {
  .welcome-img{
    height: 25em; width: 340em;
  }
-.comment{
-  border-top: solid 1px black;
-}
+
  .notice {
    width: 50%;
    margin: auto;
