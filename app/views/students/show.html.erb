@@ -13,10 +13,9 @@
       <%= link_to 'Back to Classroom', user_school_classroom_path(user_id, @school_id, classroom_id) %> |
       <%= link_to 'Delete Student', @student, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
-    <!-- Student information -->
     <div class="large-12 columns">
-
-      <div class="large-6 medium-6 columns student-info">
+      <!-- Student information -->
+      <div class="callout large-6 medium-6 columns">
         <p class="school-info">Student Info</p>
         <p>Name: <%= @student.full_name %></p>
         <p>Grade: <%= @student.grade %></p>
@@ -41,41 +40,52 @@
             <%= f.submit "Submit", class: 'button submit-button' %>
           <% end %>
         <% end %>
+        <!-- comment form -->
+        <p><button class="button" data-toggle="exampleModal9">Comment for Parents</button></p>
+        <div class="reveal" id="exampleModal9" data-reveal data-overlay="false">
+
+            <%= form_for @comment, html: {class: ''} do |f| %>
+              <%= f.label :subject %>
+              <%= f.text_field :subject %>
+
+              <%= f.label :comment, 'Class Comment' %>
+              <%= f.text_area :comment, size: "60x6" %>
+
+              <%= f.hidden_field :user_id, value: current_user.id %>
+
+              <%= f.hidden_field :classroom_id, value: @classroom_id%>
+
+              <%= f.hidden_field :student_id, value: @student.id %>
+
+              <%= f.submit "Submit", class: 'button submit-button' %>
+            <% end %>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
       </div>
       <!-- Parents info -->
-      <div class="large-6 medium-6 columns parent">
-        <% if @student.tokens.length >= 2%>
-          <% parent = User.where(id: @student.tokens[1].user_id) %>
-          <% parent.each do |parent| %>
-            <h6>Parent Name: <%= parent.full_name %></h6>
-            <h6>Email: <%= parent.email %></h6>
-            <% if parent.profile_photo? %>
-            <%= image_tag(parent.profile_photo) %><br>
+      <div class="callout large-6 medium-6 columns parent">
+        <h5>Parents Info</h5>
+          <% @student.tokens.each do |parent| %>
+            <% if parent.user.id != current_user.id %>
+            <div class="callout">
+
+              <h6>Parent Name: <%= parent.user.full_name %></h6>
+              <h6>Email: <%= parent.user.email %></h6>
+              <% if parent.user.profile_photo? %>
+              <%= image_tag(parent.user.profile_photo) %><br>
+              <% end %>
+            </div>
             <% end %>
           <% end %>
-        <% end %>
       </div>
     </div>
-    <!-- Comment form -->
-    <div class="large-6 columns form-comment">
-      <%= form_for @comment, html: {class: ''} do |f| %>
-        <%= f.label :subject %>
-        <%= f.text_field :subject %>
 
-        <%= f.label :comment, 'Class Comment' %>
-        <%= f.text_area :comment, size: "60x6" %>
-
-        <%= f.hidden_field :user_id, value: current_user.id %>
-
-        <%= f.hidden_field :classroom_id, value: @classroom_id%>
-
-        <%= f.hidden_field :student_id, value: @student.id %>
-
-        <%= f.submit "Submit", class: 'button submit-button' %>
-      <% end %>
-    </div>
     <!-- Comment list -->
     <div class="large-6 columns comment">
+      <h5>Comments to Parents</h5>
       <% @comments.each do |comment| %>
         <div class="callout">
           <p class="subject-comment-box">Subject: <%= comment.subject %></p>
@@ -85,5 +95,22 @@
         </div>
       <% end %>
     </div>
+    <div class="large-6 columns comment">
+      <h5>Comment From Parents</h5>
+      <% @student.tokens.each do |token| %>
+        <% token.user.comments.each do |comment| %>
+          <% if comment.user.id != current_user.id %>
+            <div class="callout">
+              <p>Parent: <%= comment.user.full_name %> <%= image_tag(comment.user.profile_photo) if comment.user.profile_photo? %>  </p>
+              <p class="subject-comment-box">Subject: <%= comment.subject %></p>
+              <p><%= comment.comment %></p>
+              <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    </div>
+
   </div>
 </div>
