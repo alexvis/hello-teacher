@@ -46,12 +46,11 @@
                           <p><%= comment.comment %></p>
                           <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
                           <!-- teacher comment uncheck -->
-
                           <%= form_for comment, html: {class: ''} do |f| %>
                             <%= f.hidden_field :ignore, value: true %>
                             <%= f.submit "delete", class: 'button' %>
                           <% end %>
-                          <p><button class="button" data-toggle="exampleModal9">Reply</button></p>
+                          <button class="button" data-toggle="exampleModal9">Reply</button>
                           <div class="reveal" id="exampleModal9" data-reveal data-overlay="false">
 
                             <%= form_for @comment, html: {class: ''} do |f| %>
@@ -72,25 +71,26 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
+
                         </div>
                       <% end %>
                     <% end %>
                   <% end %>
                 </div>
-              </div>
-              <div class="callout large-12 columns">
-                <h5>Relpys to Teacher</h5>
-                <% t.student.classroom.comments.reverse.each do |comment| %>
+                <div class="callout large-12 columns">
+                  <h5>Replys to Teacher</h5>
+                  <% t.student.classroom.comments.reverse.each do |comment| %>
                   <% if comment.user_id == current_user.id %>
-                    <div class="callout">
-                      <p class="subject-comment-box">Teacher Subject: <%= comment.subject %></p>
-                      <p><%= comment.comment %></p>
-                      <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
-                      <%= link_to 'Delete Comment', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <div class="callout">
+                    <p class="subject-comment-box">Teacher Subject: <%= comment.subject %></p>
+                    <p><%= comment.comment %></p>
+                    <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+                    <%= link_to 'Delete Comment', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
 
-                    </div>
+                  </div>
                   <% end %>
-                <% end %>
+                  <% end %>
+                </div>
               </div>
             <% end %>
 
