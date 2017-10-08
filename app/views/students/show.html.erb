@@ -5,24 +5,24 @@
   <% school_id = @school_id  %>
   <% user_id =  current_user.id %>
   <% classroom_id =  @classroom_id %>
-  <div class="callout large-12 columns">
+  <div class="callout large-12 columns token-box">
     <div class="large 12 columns">
 
-      <%= link_to 'Delete Token', @student.tokens[0], method: :delete, data: { confirm: 'Are you sure?' } %> |
-      <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, classroom_id, @student.id ) %> |
       <%= link_to 'Back to Classroom', user_school_classroom_path(user_id, @school_id, classroom_id) %> |
+      <%= link_to 'Edit Student', edit_user_school_classroom_student_path(user_id, @school_id, classroom_id, @student.id ) %> |
+      <%= link_to 'Delete Token', @student.tokens[0], method: :delete, data: { confirm: 'Are you sure?' } %> |
       <%= link_to 'Delete Student', @student, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
     <div class="large-12 columns">
       <!-- Student information -->
-      <div class="callout large-6 medium-6 columns">
+      <div class="callout large-6 medium-6 columns student-show-box">
         <p class="school-info">Student Info</p>
         <p>Name: <%= @student.full_name %></p>
         <p>Grade: <%= @student.grade %></p>
         <p>last Update: <%= @student.updated_at.strftime("%m/%d/%Y") %></p>
         <!-- Student profile picture if id one  -->
         <% if @student.profile_photo? %>
-        <%= image_tag(@student.profile_photo) %><br>
+        <%= image_tag(@student.profile_photo, class: 'picture') %><br>
         <% end %>
 
         <% if @student.tokens.length >=1 %>
@@ -70,7 +70,7 @@
         <h5>Parents Info</h5>
           <% @student.tokens.each do |parent| %>
             <% if parent.user.id != current_user.id %>
-            <div class="callout">
+            <div class="callout student-show-box">
 
               <h6>Parent Name: <%= parent.user.full_name %></h6>
               <h6>Email: <%= parent.user.email %></h6>
@@ -84,24 +84,27 @@
     </div>
 
     <!-- Comment list -->
-    <div class="large-6 columns comment">
+    <div class="large-6 columns parent-box-student-show">
       <h5>Comments to Parents</h5>
-      <% @comments.each do |comment| %>
-        <div class="callout">
-          <p class="subject-comment-box">Subject: <%= comment.subject %></p>
-          <p><%= comment.comment %></p>
-          <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
-          <p> <%= link_to 'Delete Comment', comment, method: :delete, data: {confirm: 'Are you sure?'} %></p>
-        </div>
+      <% @comments.reverse.each do |comment| %>
+        <% if comment.user_id == current_user.id %>
+          <div class="callout">
+            <p class="subject-comment-box">Subject: <%= comment.subject %></p>
+            <p><%= comment.comment %></p>
+            <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
+            <p> <%= link_to 'Delete Comment', comment, method: :delete, data: {confirm: 'Are you sure?'} %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
-    <div class="large-6 columns comment">
+
+    <div class="large-6 columns parent-box-student-show">
       <h5>Comment From Parents</h5>
       <% @student.tokens.each do |token| %>
-        <% token.user.comments.each do |comment| %>
+        <% token.user.comments.reverse.each do |comment| %>
           <% if comment.user.id != current_user.id %>
             <div class="callout">
-              <p>Parent: <%= comment.user.full_name %> <%= image_tag(comment.user.profile_photo) if comment.user.profile_photo? %>  </p>
+              <p>Parent: <%= comment.user.full_name %> <%= image_tag(comment.user.profile_photo, class: 'picture') if comment.user.profile_photo? %>  </p>
               <p class="subject-comment-box">Subject: <%= comment.subject %></p>
               <p><%= comment.comment %></p>
               <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
@@ -109,7 +112,6 @@
           <% end %>
         <% end %>
       <% end %>
-
     </div>
 
   </div>

@@ -7,21 +7,18 @@
             <!-- Student information array  -->
             <% if t.student != nil%>
               <% teacher = User.where(id: t.student.user_id) %>
-              <div class="callout large-12 columns">
-                <ul>
+              <div class="callout large-12 columns parent-box"> <ul>
                   <h5>Teacher Name: <%= teacher[0].full_name %></h5>
                   <p>Student Name: <%= t.student.full_name %></p>
                   <p>Grade: <%= t.student.grade %></p>
                   <p>Last Upgrate: <%= t.student.updated_at.strftime("%m/%d/%Y %H:%M") %></p>
                   <%= image_tag(t.student.profile_photo) if (t.student.profile_photo?) %>
-                  <p>Token: <%= t.token %></p>
-                  <p>Id: <%= t.student.id %> </p>
-                  <%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+                  <p>Token: <%= t.token %>       Id: <%= t.student.id %></p>
+                  <p class="button"><%= link_to 'Delete Token', t, method: :delete, data: { confirm: 'Are you sure?' } %></p><br>
                 </ul>
                 <!-- Teacher Classroom Comment -->
-                <div class="callout large-6 medium-6 columns">
+                <div class="callout large-6 medium-6 columns class-comment-box">
                   <h5>Teacher Comments:</h5>
-
                   <% t.student.classroom.comments.each do |comment| %>
                     <% if comment.ignore == false %>
                       <% if comment.student_id == nil %>
@@ -35,18 +32,18 @@
                     <% end %>
                   <% end %>
                 </div>
-                <div class="callout large-6 medium-6 columns">
-
+                <div class="callout large-6 medium-6 columns teacher-direct-box">
+                  <!-- Teacher message for parents -->
                   <h5>Teacher direct message:</h5>
-                  <% t.student.classroom.comments.each do |comment| %>
+                  <% t.student.classroom.comments.reverse.each do |comment| %>
                     <% if comment.ignore == false %>
-                      <% if comment.student_id != nil && comment.user_id != current_user.id %>
+                      <% if comment.student_id != nil && comment.user_id != current_user.id && comment.student_id == t.student_id %>
                         <div class="callout">
                           <p class="subject-comment-box">Subject: <%= comment.subject %></p>
                           <p><%= comment.comment %></p>
                           <p>Posted Date: <%= comment.created_at.strftime("%m/%d/%Y %H:%M") %></p>
                           <!-- teacher comment uncheck -->
-                          <%= form_for comment, html: {class: ''} do |f| %>
+                          <%= form_for comment, html: {class: "uncheck"} do |f| %>
                             <%= f.hidden_field :ignore, value: true %>
                             <%= f.submit "delete", class: 'button' %>
                           <% end %>
@@ -71,16 +68,15 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-
                         </div>
                       <% end %>
                     <% end %>
                   <% end %>
                 </div>
-                <div class="callout large-12 columns">
+                <div class="callout large-12 columns replys-to-teacher">
                   <h5>Replys to Teacher</h5>
                   <% t.student.classroom.comments.reverse.each do |comment| %>
-                  <% if comment.user_id == current_user.id %>
+                  <% if comment.student_id == t.student_id && comment.user.id == current_user.id%>
                   <div class="callout">
                     <p class="subject-comment-box">Teacher Subject: <%= comment.subject %></p>
                     <p><%= comment.comment %></p>
@@ -98,7 +94,7 @@
         <% end %>
       </div>
       <!-- Token fill parent -->
-      <div class="callout large-4 columns">
+      <div class="callout large-4 columns token-box">
         <h5>Enter token and id to find your child teacher</h5>
         <% user_id = current_user.id %>
         <%= form_for @token, html: { class: ''} do |f| %>

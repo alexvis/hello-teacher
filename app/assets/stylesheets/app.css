@@ -4,7 +4,10 @@
   text-align: center;
   margin-bottom: 0em;
 }
-
+.padres-student-show{
+  width: 20em;
+  margin: 0px;
+}
 
 
 div.change-password{
@@ -43,6 +46,8 @@ p.callout{
   margin-right: 1em;
 
 }
+
+
 .class-box{
   background-color: #DCDCBC;
 }
@@ -72,9 +77,45 @@ height: 10em;
 
 }
 
+.replys-to-teacher{
+  max-height: 40em;
+  overflow: auto;
+}
+
 div.form{
   position: static;
   float: left;
+}
+.parent-box{
+  background-color: #6A7FAF;
+}
+
+.parent-box-student-show{
+  background-color: #6A7FAF;
+  max-height: 39.2em;
+  overflow: auto;
+}
+
+.token-box{
+  background-color: #DCD51C;
+}
+
+.student-show-box{
+  background-color: #FBF9BE;
+}
+.uncheck{
+  float: right;
+}
+p.button{
+  background-color: #CED9F3;
+}
+.teacher-direct-box{
+  max-height: 44em;
+  overflow: auto;
+}
+.class-comment-box{
+  max-height: 44em;
+  overflow: auto;
 }
 
 .student-box{
@@ -84,8 +125,10 @@ div.form{
   margin: -5px;
 }
 .comment{
-  max-height: 35em;
+  max-height: 31.2em;
   overflow: auto;
+  background-color: #FBF9BE;
+
 }
 .center{
   text-align: center;
@@ -94,8 +137,6 @@ div.form{
 
 .school-box{
   background-color: #F7F7EC;
-
-
 }
 
 .menu-text{

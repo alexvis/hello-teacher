@@ -6,7 +6,7 @@
     <h5>Grade: <%= @classroom.grade %></h5>
     <h5>Class Number: <%= @classroom.class_number %></h5>
     <!-- Classroom comments form -->
-    <div class="comment">
+    <div>
 
       <%= form_for @comment, html: {class: ''} do |f| %>
         <%= f.label :subject %>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <!-- Teacher comment box -->
-  <div class="large-6 medium-6 small-12 columns">
+  <div class="large-6 medium-6 columns">
     <div class="callout comment">
       <h6>Teacher Comments:</h6>
       <% @classroom.comments.reverse.each do |comment| %>

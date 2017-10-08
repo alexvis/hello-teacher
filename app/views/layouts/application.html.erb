@@ -19,6 +19,7 @@
       <% if current_user %>
         <%= image_tag(current_user.profile_photo, class: 'picture') if current_user.profile_photo? %>
       <% end %>
+      <p class="menu-text "> <%= current_user.full_name if user_signed_in? %> </p>
       <div class="top-bar-right">
         <ul class="dropdown menu" data-dropdown-menu>
           <% if user_signed_in?  %>
